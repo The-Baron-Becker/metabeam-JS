@@ -24,9 +24,6 @@ function loadUserWallet() {
   );
 }
 function swapOutLightbox(nftSrc, name, data, isVideoFile) {
-  const $img = $(`.w-lightbox-img`);
-  const $figure = $(`.w-lightbox-figure`);
-  const $caption = $(`.w-lightbox-caption`);
   const classes = `w-lightbox-image w-lightbox-img`;
   const dataAttr = getDataAttr(data);
   const imageCode = isVideoFile
@@ -38,8 +35,11 @@ function swapOutLightbox(nftSrc, name, data, isVideoFile) {
       ? ``
       : `<select class="beam-select">${options}</select>`;
   const beamWrapper = `<div class="beam-wrapper">${deviceSelect}<div class='beam-btn'>Beam NFT</div></div>`;
-  $figure.hide();
+  $(`.w-lightbox-figure`).hide();
   setTimeout(() => {
+    const $img = $(`.w-lightbox-img`);
+    const $figure = $(`.w-lightbox-figure`);
+    const $caption = $(`.w-lightbox-caption`);
     $figure.show();
     $img.replaceWith(imageCode);
     $caption.html(name);
