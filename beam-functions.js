@@ -62,6 +62,7 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
   $galleryItems.wrap(`<div class="imagegrid imagegrid-container"></div>`);
   nfts.forEach(async (nft, idx) => {
     let nftSrc = nft.artwork;
+    const nftId = nft.nft_id || "";
     const name = nft.query;
     const $currGalleryItem = $galleryItems.eq(idx);
     const $lightboxLink = $currGalleryItem.parent();
@@ -71,12 +72,12 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
       webpSrc = webpSrc.substr(0, webpSrc.length - 4) + ".webp";
       nftSrc = nftSrc.replace("./static/", `${baseUrl}/static/`);
       $currGalleryItem.replaceWith(
-        `<img src="${webpSrc}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
+        `<img src="${webpSrc}" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
       );
     } else {
       nftSrc = nftSrc.replace("./static/", `${baseUrl}/static/`);
       $currGalleryItem.replaceWith(
-        `<img src="${baseUrl}/thumbnail/${nft.nft_id}?w=300&h=300" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
+        `<img src="${baseUrl}/thumbnail/${nft.nft_id}?w=300&h=300" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
       );
     }
   });
@@ -103,14 +104,13 @@ const setGridContents = (nfts, $grid, data = {}) => {
     if (!nftSrc) {
       return;
     }
-    const nftId = nft.nft_id || "";
     const dataAttr = getDataAttr(data);
     const artist = nft.artist;
     const name = `${nft.name} - ${artist}`;
     const isVideoFile = checkIfVideo(nftSrc);
-    let newImage = `<div class="imagegrid imagegrid-container"><img src="${nftSrc}" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" ${dataAttr} class="imagegrid-replacement" /></div>`;
+    let newImage = `<div class="imagegrid imagegrid-container"><img src="${nftSrc}" data-src="${nftSrc}" data-name="${name}" ${dataAttr} class="imagegrid-replacement" /></div>`;
     if (isVideoFile) {
-      newImage = `<div class="imagegrid imagegrid-container"><video src="${nftSrc}" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" ${dataAttr} class="imagegrid-replacement" muted playsinline loop preload="auto" autoplay webkit-playsinline x5-playsinline /></div>`;
+      newImage = `<div class="imagegrid imagegrid-container"><video src="${nftSrc}" data-src="${nftSrc}" data-name="${name}" ${dataAttr} class="imagegrid-replacement" muted playsinline loop preload="auto" autoplay webkit-playsinline x5-playsinline /></div>`;
     }
     const $imageContainer = $grid.append(newImage);
   });
