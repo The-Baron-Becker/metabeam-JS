@@ -44,7 +44,7 @@ function swapOutLightbox(nftSrc, name, data, isVideoFile) {
     const $caption = $(`.w-lightbox-caption`);
     $figure.show();
     $img.replaceWith(imageCode);
-    $caption.html(name);
+    $caption.html(caption);
     $caption.after(beamWrapper);
     $(`.beam-btn`).click(() =>
       beamNFT(
