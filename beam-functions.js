@@ -26,6 +26,7 @@ function loadUserWallet() {
 function swapOutLightbox(nftSrc, name, data, isVideoFile) {
   const classes = `w-lightbox-image w-lightbox-img`;
   const dataAttr = getDataAttr(data);
+  const purchaseUrl = data['nftid'] ? `https://nftviewr.completewebtech.com/etherscan/${data['nftid']}` : `https://etherscan.io/nft/${data['contractaddress']}/${data['tokenid']}`;
   const imageCode = isVideoFile
     ? `<video src="${nftSrc}" ${dataAttr} class="${classes}" muted playsinline loop preload="auto" autoplay webkit-playsinline x5-playsinline />`
     : `<img src="${nftSrc}" ${dataAttr} class="${classes}" />`;
@@ -35,6 +36,7 @@ function swapOutLightbox(nftSrc, name, data, isVideoFile) {
       ? ``
       : `<select class="beam-select">${options}</select>`;
   const beamWrapper = `<div class="beam-wrapper">${deviceSelect}<div class='beam-btn'>Beam NFT</div></div>`;
+  const caption = `${name}<a href="${purchaseUrl}">Buy this NFT</a>`;
   $(`.w-lightbox-figure`).hide();
   setTimeout(() => {
     const $img = $(`.w-lightbox-img`);
@@ -101,13 +103,14 @@ const setGridContents = (nfts, $grid, data = {}) => {
     if (!nftSrc) {
       return;
     }
+    const nftId = nft.nft_id || "";
     const dataAttr = getDataAttr(data);
     const artist = nft.artist;
     const name = `${nft.name} - ${artist}`;
     const isVideoFile = checkIfVideo(nftSrc);
-    let newImage = `<div class="imagegrid imagegrid-container"><img src="${nftSrc}" data-src="${nftSrc}" data-name="${name}" ${dataAttr} class="imagegrid-replacement" /></div>`;
+    let newImage = `<div class="imagegrid imagegrid-container"><img src="${nftSrc}" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" ${dataAttr} class="imagegrid-replacement" /></div>`;
     if (isVideoFile) {
-      newImage = `<div class="imagegrid imagegrid-container"><video src="${nftSrc}" data-src="${nftSrc}" data-name="${name}" ${dataAttr} class="imagegrid-replacement" muted playsinline loop preload="auto" autoplay webkit-playsinline x5-playsinline /></div>`;
+      newImage = `<div class="imagegrid imagegrid-container"><video src="${nftSrc}" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" ${dataAttr} class="imagegrid-replacement" muted playsinline loop preload="auto" autoplay webkit-playsinline x5-playsinline /></div>`;
     }
     const $imageContainer = $grid.append(newImage);
   });
