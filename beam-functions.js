@@ -29,7 +29,7 @@ function swapOutLightbox(nftSrc, name, data, isVideoFile) {
   const imageCode = isVideoFile
     ? `<video src="${nftSrc}" ${dataAttr} class="${classes}" muted playsinline loop preload="auto" autoplay webkit-playsinline x5-playsinline />`
     : `<img src="${nftSrc}" ${dataAttr} class="${classes}" />`;
-  const options = ``;
+  const options = devices.map(d => `<option value="${d.serial_number}">${d.name}</option>`);
   const deviceSelect =
     devices.length <= 1
       ? ``
