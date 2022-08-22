@@ -68,7 +68,8 @@ window.checkIfMembershipNeedsPayment = async () => {
   }
 };
 window.beamNFT = async (url, wallet_address, contract_address, token_id) => {
-  const selDevice = devices[0];
+  const devIdx = parseInt(document.querySelector(".beam-select")?.value || 0);
+  const selDevice = devices[devIdx];
   const devName = selDevice.name;
   const serial = selDevice.serial_number;
   const modal = document.querySelector(".beaming-modal");
