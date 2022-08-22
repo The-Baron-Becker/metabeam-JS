@@ -34,10 +34,10 @@ function swapOutLightbox(nftSrc, name, data, isVideoFile) {
     : `<img src="${nftSrc}" ${dataAttr} class="${classes}" />`;
   const options = ``;
   const deviceSelect =
-    devices.length === 0
+    devices.length <= 1
       ? ``
       : `<select class="beam-select">${options}</select>`;
-  const beamWrapper = `<div class="beam-wrapper">${deviceSelect}<div class='beam-btn'>Beam NFT</div>`;
+  const beamWrapper = `<div class="beam-wrapper">${deviceSelect}<div class='beam-btn'>Beam NFT</div></div>`;
   $figure.hide();
   setTimeout(() => {
     $figure.show();
