@@ -26,7 +26,7 @@ function loadUserWallet() {
 function swapOutLightbox(nftSrc, name, data, isVideoFile) {
   const classes = `w-lightbox-image w-lightbox-img`;
   const dataAttr = getDataAttr(data);
-  const purchaseUrl = data['nftid'] ? `https://nftviewr.completewebtech.com/etherscan/${data['nftid']}` : `https://etherscan.io/nft/${data['contractaddress']}/${data['tokenid']}`;
+  const purchaseUrl = data['nftid'] ? `https://nftviewr.completewebtech.com/etherscan/${data['nftid']}` : `https://etherscan.io/nft/${data['contractAddress']}/${data['tokenId']}`;
   const imageCode = isVideoFile
     ? `<video src="${nftSrc}" ${dataAttr} class="${classes}" muted playsinline loop preload="auto" autoplay webkit-playsinline x5-playsinline />`
     : `<img src="${nftSrc}" ${dataAttr} class="${classes}" />`;
