@@ -125,6 +125,13 @@ const setGridContents = (nfts, $grid, data = {}) => {
   });
 };
 const setWalletCollection = (nfts, walletAddress = "") => {
+  if ( nfts.length > 0 ) {
+    $(".empty-wallet").hide();
+    $(".wallet-grid").show();
+  } else {
+    $(".empty-wallet").show();
+    $(".wallet-grid").hide();
+  }
   setGridContents(nfts, $yourNFTsGrid, { walletAddress });
 };
 const setSearchResults = (nfts, data = {}) => {
