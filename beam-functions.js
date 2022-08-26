@@ -252,6 +252,7 @@ async function connectWalletWithMetaMask(e) {
     return;
   }
   alert(`Your wallet: ${walletAddress} has now been connected!`);
+  loadUserWallet();
 }
 
 connectWalletBtn.addEventListener("click", connectWalletWithMetaMask);
