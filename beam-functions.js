@@ -36,7 +36,7 @@ function swapOutLightbox(nftSrc, name, data, isVideoFile) {
       ? ``
       : `<select class="beam-select">${options}</select>`;
   const beamWrapper = `<div class="beam-wrapper">${deviceSelect}<div class='beam-btn'>Beam NFT</div></div>`;
-  const caption = `${name}<a href="${purchaseUrl}">Buy this NFT</a>`;
+  const caption = `${name}<a href="${purchaseUrl}"><img src="https://uploads-ssl.webflow.com/62dec8d82ed41d0b91ac5cf1/6308a790758189efc490aaca_etherscan-logo-circle.png" alt="etherscan link" /></a>`;
   $(`.w-lightbox-figure`).hide();
   setTimeout(() => {
     const $img = $(`.w-lightbox-img`);
