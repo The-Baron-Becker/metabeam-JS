@@ -19,8 +19,9 @@ function loadUserWallet() {
     userWalletAddress.substr(0, 4) + "..." + userWalletAddress.substr(-4);
   $(".main-network-title").html(`Main Network (${walletAbrv})`);
   $(".your-nfts-title").html(`Your NFTs (${walletAbrv})`);
-  fetchWallet(userWalletAddress).then((nfts) =>
-    setWalletCollection(nfts.collection, userWalletAddress)
+  fetchWallet(userWalletAddress).then(
+    (nfts) => setWalletCollection(nfts.collection, userWalletAddress),
+    (reason) => $(".wallet-grid").hide()
   );
 }
 function swapOutLightbox(nftSrc, name, data, isVideoFile) {
