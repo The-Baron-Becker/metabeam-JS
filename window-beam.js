@@ -55,9 +55,12 @@ window.loadUserDevicesList = async () => {
 };
 window.checkIfMembershipNeedsPayment = async () => {
   const res = await makeAPIRequestWithToken("membership/status");
-  if (res.status === "overdue") {
+  const { email, status } = res;
+  if (status === "overdue") {
     $(".stripe-payment").css("display", "flex");
   }
+  $(".email-text").html(`Username: ${email}`);
+  $(".email-display").show();
   loadUserDevicesList();
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
