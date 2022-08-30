@@ -13,6 +13,8 @@ function loadUserWallet() {
   if (userWalletAddress === "") {
     $(".main-network-title").html("Main Network (Wallet Not Connected)");
     $(".your-nfts-title").html("Your NFTs (Wallet Not Connected)");
+    $(".empty-wallet").show();
+    $(".wallet-grid").hide();
     return;
   }
   const walletAbrv =
