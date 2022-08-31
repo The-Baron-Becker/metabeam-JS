@@ -138,6 +138,10 @@ const setWalletCollection = (nfts, walletAddress = "") => {
   setGridContents(nfts, $yourNFTsGrid, { walletAddress });
 };
 const setSearchResults = (nfts, data = {}) => {
+  $(".search-no-results").hide();
+  if ( nfts.length === 0 ) {
+    $(".search-no-results").show();
+  }
   setGridContents(nfts, $resultsGrid, data);
 };
 $(document).click(function (e) {
