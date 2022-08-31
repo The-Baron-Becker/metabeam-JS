@@ -138,7 +138,6 @@ const setWalletCollection = (nfts, walletAddress = "") => {
   setGridContents(nfts, $yourNFTsGrid, { walletAddress });
 };
 const setSearchResults = (nfts, data = {}) => {
-  $(".search-no-results").hide();
   if ( nfts.length === 0 ) {
     $(".search-no-results").show();
   }
@@ -158,20 +157,25 @@ $searchBtn.click(async (e) => {
   const tokenId = encodeURIComponent($tokenId.val());
   const walletAddress = encodeURIComponent($walletAddress.val());
   const keyword = encodeURIComponent($keyword.val());
-  if (contractAddress !== "" && tokenId !== "") {
-    const nfts = await makeAPIRequest(`contract/${contractAddress}/${tokenId}`);
-    setSearchResults(nfts.collection, { contractAddress, tokenId });
-  } else if (walletAddress !== "") {
-    fetchWallet(walletAddress).then((nfts) =>
-      setSearchResults(nfts.collection, { walletAddress })
-    );
-  } else if (keyword !== "") {
-    const nfts = await makeAPIRequest(`search?q=${keyword}`);
-    setSearchResults(nfts.collection);
-  } else {
-    alert(
-      "Please fill out either the contract address and token id or the wallet address."
-    );
+  try {
+    $(".search-no-results").hide();
+    if (contractAddress !== "" && tokenId !== "") {
+      const nfts = await makeAPIRequest(`contract/${contractAddress}/${tokenId}`);
+      setSearchResults(nfts.collection, { contractAddress, tokenId });
+    } else if (walletAddress !== "") {
+      fetchWallet(walletAddress).then((nfts) =>
+        setSearchResults(nfts.collection, { walletAddress })
+      );
+    } else if (keyword !== "") {
+      const nfts = await makeAPIRequest(`search?q=${keyword}`);
+      setSearchResults(nfts.collection);
+    } else {
+      alert(
+        "Please fill out either the contract address and token id or the wallet address."
+      );
+    }
+  } catch {
+    $(".search-no-results").show();
   }
 });
 
