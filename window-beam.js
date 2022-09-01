@@ -52,7 +52,7 @@ window.makeAPIRequest = async (endpoint, options = {}) => {
 window.loadUserDevicesList = async () => {
   const { devices } = await makeAPIRequestWithToken(`devices`);
   window.devices = devices;
-  const devicesList = devices.map(d => `<li><img src="https://uploads-ssl.webflow.com/62dec8d82ed41d0b91ac5cf1/6310cf8381e79c171b4d1345_trash.svg" class="delete-tv-icon" alt="Delete this TV" /> ${d.name}</li>`).join();
+  const devicesList = devices.map(d => `<li><img src="https://uploads-ssl.webflow.com/62dec8d82ed41d0b91ac5cf1/6310cf8381e79c171b4d1345_trash.svg" class="delete-tv-icon" alt="Delete this TV" data-serial="${d.serial_number}" /> ${d.name}</li>`).join();
   $(".registered-devices-list").html(`<ul>${devicesList}</ul>`);
 };
 window.checkIfMembershipNeedsPayment = async () => {
