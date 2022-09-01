@@ -144,8 +144,13 @@ const setSearchResults = (nfts, data = {}) => {
   setGridContents(nfts, $resultsGrid, data);
 };
 $(document).click(function (e) {
+  const serial = $(e.target).data("serial") || "";
   const nftSrc = $(e.target).data("src");
   const name = $(e.target).data("name") || "";
+  if ($(e.target).hasClass("delete-tv-icon") && serial !== "") {
+    const tvName = $(e.target).data("name");
+    return confirm(`Are you sure you want to delete ${tvName}?`);
+  }
   if (!nftSrc) {
     return;
   }
