@@ -52,6 +52,8 @@ window.makeAPIRequest = async (endpoint, options = {}) => {
 window.loadUserDevicesList = async () => {
   const { devices } = await makeAPIRequestWithToken(`devices`);
   window.devices = devices;
+  const devicesList = devices.map(d => `<li>${d.name}</li>`).join();
+  $(".registered-devices-list").html(`<ul>${devicesList}</ul>`);
 };
 window.checkIfMembershipNeedsPayment = async () => {
   const res = await makeAPIRequestWithToken("membership/status");
