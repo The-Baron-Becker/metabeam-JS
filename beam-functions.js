@@ -153,7 +153,7 @@ const deleteTV = async ($target) => {
   if (!confirm(`Are you sure you want to delete ${tvName}?`)) {
     return;
   }
-  await makeAPIRequest(`pairing/setup?serial=${serial}`);
+  await makeAPIRequest(`pairing/setup?serial=${serial}`, {method: "DELETE"});
   loadUserDevicesList();
 };
 $(document).click(function (e) {
@@ -207,7 +207,7 @@ async function login(e, register = false) {
   const password = $form.find("input[type='password']").val();
   const endpoint = register ? `register` : `login`;
   const res = await makeAPIRequest(endpoint, {
-    method: "POST", // or 'PUT'
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
