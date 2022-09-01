@@ -153,7 +153,9 @@ const deleteTV = async ($target) => {
   if (!confirm(`Are you sure you want to delete ${tvName}?`)) {
     return;
   }
-  await makeAPIRequest(`pairing/setup?serial=${serial}`, {method: "DELETE"});
+  try {
+    await makeAPIRequest(`pairing/setup?serial=${serial}`, {method: "DELETE"});
+  } catch {}
   loadUserDevicesList();
 };
 $(document).click(function (e) {
