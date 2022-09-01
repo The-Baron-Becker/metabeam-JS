@@ -143,14 +143,23 @@ const setSearchResults = (nfts, data = {}) => {
   }
   setGridContents(nfts, $resultsGrid, data);
 };
+const deleteTV = async ($target) => {
+  const serial = encodeURIComponent($target.data("serial") || "");
+  const tvName = $target.data("name") || "";
+  const isClickingDeleteBtn = $target.hasClass("delete-tv-icon");
+  if (!isClickingDeleteBtn || serial === "" || tvName === "") {
+    return;
+  }
+  if (!confirm(`Are you sure you want to delete ${tvName}?`)) {
+    return;
+  }
+  await makeAPIRequest(`pairing/setup?serial=${serial}`);
+  loadUserDevicesList();
+};
 $(document).click(function (e) {
-  const serial = $(e.target).data("serial") || "";
+  deleteTV($(e.target));
   const nftSrc = $(e.target).data("src");
   const name = $(e.target).data("name") || "";
-  if ($(e.target).hasClass("delete-tv-icon") && serial !== "") {
-    const tvName = $(e.target).data("name");
-    return confirm(`Are you sure you want to delete ${tvName}?`);
-  }
   if (!nftSrc) {
     return;
   }
