@@ -89,22 +89,20 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
   const $galleryItems = $(`.featured-gallery-grid img`);
   $galleryItems.css("margin-bottom", 0);
   $galleryItems.wrap(`<div class="imagegrid imagegrid-container"></div>`);
-  nfts.forEach(async (nft, idx) => {
-    let nftSrc = nft.artwork;
+  nfts.collection.forEach(async (nft, idx) => {
+    let nftSrc = nft.links[0];
     const nftId = nft.nft_id || "";
-    const name = nft.query;
+    const name = nft.name;
     const $currGalleryItem = $galleryItems.eq(idx);
     const $lightboxLink = $currGalleryItem.parent();
     const isVideoFile = checkIfVideo(nftSrc);
     if (isVideoFile) {
-      let webpSrc = nftSrc.replace("./static/", `${baseUrl}/static/min/`);
+      let webpSrc = nftSrc.replace("/static/", `/static/min/`);
       webpSrc = webpSrc.substr(0, webpSrc.length - 4) + ".webp";
-      nftSrc = nftSrc.replace("./static/", `${baseUrl}/static/`);
       $currGalleryItem.replaceWith(
         `<img src="${webpSrc}" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
       );
     } else {
-      nftSrc = nftSrc.replace("./static/", `${baseUrl}/static/`);
       $currGalleryItem.replaceWith(
         `<img src="${baseUrl}/thumbnail/${nft.nft_id}?w=300&h=300" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
       );
