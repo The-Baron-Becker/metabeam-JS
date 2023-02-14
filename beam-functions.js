@@ -265,7 +265,7 @@ async function connectWalletWithMetaMask(e) {
   e.preventDefault();
   const walletIsInstalled = checkIfWalletIsInstalled();
   if (!walletIsInstalled) {
-    alert("MetaMask isnt installed, please install it.");
+    alert("MetaMask is not installed");
     return;
   }
   const token = getCookie("token");
@@ -276,7 +276,7 @@ async function connectWalletWithMetaMask(e) {
   const accounts = await window.ethereum
     .request({ method: "eth_requestAccounts" })
     .catch((e) => {
-      alert("Failed to fetch wallets. Did you grant us permission?");
+      alert("Failed to connect wallet");
       return;
     });
   if (!accounts) {
@@ -293,7 +293,7 @@ async function connectWalletWithMetaMask(e) {
   });
   if (!res.wallets.includes(walletAddress)) {
     alert(
-      `Failed to connect your wallet: ${walletAddress}. Did you register this wallet with another account?`
+      `Failed to connect wallet: ${walletAddress}. Did you register this wallet with another account?`
     );
     return;
   }
