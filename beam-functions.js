@@ -265,11 +265,7 @@ async function connectWalletWithMetaMask(e) {
   e.preventDefault();
   const walletIsInstalled = checkIfWalletIsInstalled();
   if (!walletIsInstalled) {
-    alert(
-      "MetaMask isnt installed, please install it. \
-			You cannot connect your wallet to your account without first \
-			installing the MetaMask extension."
-    );
+    alert("MetaMask isnt installed, please install it.");
     return;
   }
   const token = getCookie("token");
