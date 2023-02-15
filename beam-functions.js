@@ -59,7 +59,7 @@ function swapOutLightbox(nftSrc, name, data, isVideoFile) {
     );
   }, 500);
 }
-makeAPIRequest(`random?size=20&square=1`).then((nfts) => {
+makeAPIRequest(`random?size=20`).then((nfts) => {
   const $galleryItems = $(`.new-gallery-grid img`);
   $galleryItems.css("margin-bottom", 0);
   $galleryItems.wrap(`<div class="imagegrid imagegrid-container"></div>`);
@@ -80,7 +80,7 @@ makeAPIRequest(`random?size=20&square=1`).then((nfts) => {
     } else {
       nftSrc = nftSrc.replace("./static/", `${baseUrl}/static/`);
       $currGalleryItem.replaceWith(
-        `<img src="${baseUrl}/thumbnail/${nft.nft_id}?w=300&h=300&square=1" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
+        `<img src="${baseUrl}/thumbnail/${nft.nft_id}?w=300&h=300" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
       );
     }
   });
@@ -104,7 +104,7 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
       );
     } else {
       $currGalleryItem.replaceWith(
-        `<img src="${baseUrl}/thumbnail/${nft.nft_id}?w=300&h=300&square=1" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
+        `<img src="${baseUrl}/thumbnail/${nft.nft_id}?w=300&h=300" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
       );
     }
   });
