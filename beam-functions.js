@@ -29,11 +29,15 @@ function loadUserWallet() {
 function swapOutLightbox(nftSrc, name, data, isVideoFile) {
   const classes = `w-lightbox-image w-lightbox-img`;
   const dataAttr = getDataAttr(data);
-  const purchaseUrl = data['nftid'] ? `https://nftviewr.completewebtech.com/etherscan/${data['nftid']}` : `https://etherscan.io/nft/${data['contractaddress']}/${data['tokenid']}`;
+  const purchaseUrl = data["nftid"]
+    ? `https://nftviewr.completewebtech.com/etherscan/${data["nftid"]}`
+    : `https://etherscan.io/nft/${data["contractaddress"]}/${data["tokenid"]}`;
   const imageCode = isVideoFile
     ? `<video src="${nftSrc}" ${dataAttr} class="${classes}" muted playsinline loop preload="auto" autoplay webkit-playsinline x5-playsinline />`
     : `<img src="${nftSrc}" ${dataAttr} class="${classes}" />`;
-  const options = devices.map((d, idx) => `<option value="${idx}">${d.name}</option>`);
+  const options = devices.map(
+    (d, idx) => `<option value="${idx}">${d.name}</option>`
+  );
   const deviceSelect =
     devices.length <= 1
       ? ``
@@ -80,7 +84,7 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
     } else {
       nftSrc = nftSrc.replace("./static/", `${baseUrl}/static/`);
       $currGalleryItem.replaceWith(
-        `<img src="${baseUrl}/thumbnail/${nft.nft_id}?w=300&h=300" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
+        `<img src="${baseUrl}/thumbnail/${nft.nft_id}?w=300&h=300&square=1" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
       );
     }
   });
@@ -104,7 +108,7 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
       );
     } else {
       $currGalleryItem.replaceWith(
-        `<img src="${baseUrl}/thumbnail/${nft.nft_id}?w=300&h=300" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
+        `<img src="${baseUrl}/thumbnail/${nft.nft_id}?w=300&h=300&square=1" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
       );
     }
   });
@@ -124,10 +128,10 @@ const setGridContents = (nfts, $grid, data = {}) => {
   }
   nfts.forEach((nft, idx) => {
     if (nft.contractAddress) {
-      data['contractaddress'] = nft.contractAddress;
+      data["contractaddress"] = nft.contractAddress;
     }
     if (nft.tokenId) {
-      data['tokenid'] = nft.tokenId;
+      data["tokenid"] = nft.tokenId;
     }
     let nftSrc =
       nft.links.find((link) => link.endsWith(".mp4")) ||
@@ -152,7 +156,7 @@ const setGridContents = (nfts, $grid, data = {}) => {
   });
 };
 const setWalletCollection = (nfts, walletAddress = "") => {
-  if ( nfts.length > 0 ) {
+  if (nfts.length > 0) {
     $(".empty-wallet").hide();
     $(".wallet-grid").show();
   } else {
@@ -162,7 +166,7 @@ const setWalletCollection = (nfts, walletAddress = "") => {
   setGridContents(nfts, $yourNFTsGrid, { walletAddress });
 };
 const setSearchResults = (nfts, data = {}) => {
-  if ( nfts.length === 0 ) {
+  if (nfts.length === 0) {
     $(".search-no-results").show();
   }
   setGridContents(nfts, $resultsGrid, data);
@@ -178,7 +182,9 @@ const deleteTV = async ($target) => {
     return;
   }
   try {
-    await makeAPIRequest(`pairing/setup?serial=${serial}`, {method: "DELETE"});
+    await makeAPIRequest(`pairing/setup?serial=${serial}`, {
+      method: "DELETE",
+    });
   } catch {}
   loadUserDevicesList();
 };
@@ -200,7 +206,9 @@ $searchBtn.click(async (e) => {
   try {
     $(".search-no-results").hide();
     if (contractAddress !== "" && tokenId !== "") {
-      const nfts = await makeAPIRequest(`contract/${contractAddress}/${tokenId}`);
+      const nfts = await makeAPIRequest(
+        `contract/${contractAddress}/${tokenId}`
+      );
       setSearchResults(nfts.collection, { contractAddress, tokenId });
     } else if (walletAddress !== "") {
       fetchWallet(walletAddress).then((nfts) =>
