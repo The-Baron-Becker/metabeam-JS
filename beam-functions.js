@@ -8,6 +8,9 @@ const $keyword = $("input[name='keyword']");
 const fetchWallet = (walletAddress) =>
   makeAPIRequest(`wallet/${walletAddress}`);
 const checkIfVideo = (nftSrc) => nftSrc.endsWith(".mp4");
+function openInNewTab(url) {
+  window.open(url, '_blank').focus();
+}
 function loadUserWallet() {
   const userWalletAddress = window.getCookie("user wallet address");
   if (userWalletAddress === "") {
@@ -97,7 +100,7 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
     }
     $currGalleryTitle.html(name);
     $currGalleryArtist.html(artist);
-    $currGalleryEtherscanLink.click(function() { location.href = etherscanLink });
+    $currGalleryEtherscanLink.click(function() { openInNewTab( etherscanLink ) });
   });
 });
 makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
@@ -132,7 +135,7 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
     }
     $currGalleryTitle.html(name);
     $currGalleryArtist.html(artist);
-    $currGalleryEtherscanLink.click(function() { location.href = etherscanLink });
+    $currGalleryEtherscanLink.click(function() { openInNewTab( etherscanLink ) });
   });
 });
 const getDataAttr = (data) => {
