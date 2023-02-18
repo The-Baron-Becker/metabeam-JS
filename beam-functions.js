@@ -111,6 +111,7 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
     let nftSrc = nft.links[0];
     const nftId = nft.nft_id || "";
     const name = nft.name;
+    const artist = nft.username;
     const $currGalleryItem = $galleryItems.eq(idx);
     const $currGalleryTitle = $galleryItemsTitles.eq(idx);
     const $currGalleryArtist = $galleryItemsArtists.eq(idx);
