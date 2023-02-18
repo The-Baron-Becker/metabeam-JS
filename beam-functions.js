@@ -65,6 +65,8 @@ function swapOutLightbox(nftSrc, name, data, isVideoFile) {
 }
 makeAPIRequest(`random?size=20`).then((nfts) => {
   const $galleryItems = $(`.new-gallery-grid img`);
+  const $galleryItemsTitles = $(`.new-gallery-grid .nft-title`);
+  const $galleryItemsArtists = $(`.new-gallery-grid .nft-artist`);
   $galleryItems.css("margin-bottom", 0);
   $galleryItems.wrap(`<div class="imagegrid imagegrid-container"></div>`);
   nfts.forEach(async (nft, idx) => {
@@ -72,6 +74,8 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
     const nftId = nft.nft_id || "";
     const name = nft.query;
     const $currGalleryItem = $galleryItems.eq(idx);
+    const $currGalleryTitle = $galleryItemsTitles.eq(idx);
+    const $currGalleryArtist = $galleryItemsArtists.eq(idx);
     const $lightboxLink = $currGalleryItem.parent();
     const isVideoFile = checkIfVideo(nftSrc);
     if (isVideoFile) {
@@ -81,11 +85,13 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
       $currGalleryItem.replaceWith(
         `<img src="${webpSrc}" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
       );
+      $currGalleryTitle.html(name);
     } else {
       nftSrc = nftSrc.replace("./static/", `${baseUrl}/static/`);
       $currGalleryItem.replaceWith(
         `<img src="${baseUrl}/thumbnail/${nft.nft_id}?w=300&h=300&square=1" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
       );
+      $currGalleryTitle.html(name);
     }
   });
 });
