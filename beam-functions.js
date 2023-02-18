@@ -98,6 +98,8 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
 });
 makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
   const $galleryItems = $(`.featured-gallery-grid img`);
+  const $galleryItemsTitles = $(`.featured-gallery-grid .nft-title`);
+  const $galleryItemsArtists = $(`.featured-gallery-grid .nft-artist`);
   $galleryItems.css("margin-bottom", 0);
   $galleryItems.wrap(`<div class="imagegrid imagegrid-container"></div>`);
   nfts.collection.forEach(async (nft, idx) => {
@@ -105,6 +107,8 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
     const nftId = nft.nft_id || "";
     const name = nft.name;
     const $currGalleryItem = $galleryItems.eq(idx);
+    const $currGalleryTitle = $galleryItemsTitles.eq(idx);
+    const $currGalleryArtist = $galleryItemsArtists.eq(idx);
     const $lightboxLink = $currGalleryItem.parent();
     const isVideoFile = checkIfVideo(nftSrc);
     if (isVideoFile) {
@@ -118,6 +122,8 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
         `<img src="${baseUrl}/thumbnail/${nft.nft_id}?w=300&h=300&square=1" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
       );
     }
+    $currGalleryTitle.html(name);
+    $currGalleryArtist.html(artist);
   });
 });
 const getDataAttr = (data) => {
