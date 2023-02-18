@@ -67,6 +67,7 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
   const $galleryItems = $(`.new-gallery-grid img`);
   const $galleryItemsTitles = $(`.new-gallery-grid .nft-title`);
   const $galleryItemsArtists = $(`.new-gallery-grid .nft-artist`);
+  const $galleryItemsEtherscanLinks = $(`.new-gallery-grid .etherscan-link`);
   $galleryItems.css("margin-bottom", 0);
   $galleryItems.wrap(`<div class="imagegrid imagegrid-container"></div>`);
   nfts.forEach(async (nft, idx) => {
@@ -77,6 +78,8 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
     const $currGalleryItem = $galleryItems.eq(idx);
     const $currGalleryTitle = $galleryItemsTitles.eq(idx);
     const $currGalleryArtist = $galleryItemsArtists.eq(idx);
+    const $currGalleryEtherscanLink = $galleryItemsEtherscanLinks.eq(idx);
+    const etherscanLink = `${baseUrl}/etherscan/${nftId}`;
     const $lightboxLink = $currGalleryItem.parent();
     const isVideoFile = checkIfVideo(nftSrc);
     if (isVideoFile) {
@@ -94,12 +97,14 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
     }
     $currGalleryTitle.html(name);
     $currGalleryArtist.html(artist);
+    $currGalleryEtherscanLink.click(function() { location.href = etherscanLink });
   });
 });
 makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
   const $galleryItems = $(`.featured-gallery-grid img`);
   const $galleryItemsTitles = $(`.featured-gallery-grid .nft-title`);
   const $galleryItemsArtists = $(`.featured-gallery-grid .nft-artist`);
+  const $galleryItemsEtherscanLinks = $(`.featured-gallery-grid .etherscan-link`);
   $galleryItems.css("margin-bottom", 0);
   $galleryItems.wrap(`<div class="imagegrid imagegrid-container"></div>`);
   nfts.collection.forEach(async (nft, idx) => {
@@ -109,6 +114,8 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
     const $currGalleryItem = $galleryItems.eq(idx);
     const $currGalleryTitle = $galleryItemsTitles.eq(idx);
     const $currGalleryArtist = $galleryItemsArtists.eq(idx);
+    const $currGalleryEtherscanLink = $galleryItemsEtherscanLinks.eq(idx);
+    const etherscanLink = `${baseUrl}/etherscan/${nftId}`;
     const $lightboxLink = $currGalleryItem.parent();
     const isVideoFile = checkIfVideo(nftSrc);
     if (isVideoFile) {
@@ -124,6 +131,7 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
     }
     $currGalleryTitle.html(name);
     $currGalleryArtist.html(artist);
+    $currGalleryEtherscanLink.click(function() { location.href = etherscanLink });
   });
 });
 const getDataAttr = (data) => {
