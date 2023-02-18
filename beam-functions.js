@@ -73,6 +73,7 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
     let nftSrc = nft.artwork;
     const nftId = nft.nft_id || "";
     const name = nft.query;
+    const artist = nft.username;
     const $currGalleryItem = $galleryItems.eq(idx);
     const $currGalleryTitle = $galleryItemsTitles.eq(idx);
     const $currGalleryArtist = $galleryItemsArtists.eq(idx);
@@ -85,14 +86,14 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
       $currGalleryItem.replaceWith(
         `<img src="${webpSrc}" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
       );
-      $currGalleryTitle.html(name);
     } else {
       nftSrc = nftSrc.replace("./static/", `${baseUrl}/static/`);
       $currGalleryItem.replaceWith(
         `<img src="${baseUrl}/thumbnail/${nft.nft_id}?w=300&h=300&square=1" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
       );
-      $currGalleryTitle.html(name);
     }
+    $currGalleryTitle.html(name);
+    $currGalleryArtist.html(artist);
   });
 });
 makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
