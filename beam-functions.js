@@ -71,6 +71,7 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
   const $galleryItemsTitles = $(`.new-gallery-grid .nft-title`);
   const $galleryItemsArtists = $(`.new-gallery-grid .nft-artist`);
   const $galleryItemsEtherscanLinks = $(`.new-gallery-grid .etherscan-link`);
+  const $galleryItemsLikeButtons = $(`.new-gallery-grid .like-nft-heart`);
   $galleryItems.css("margin-bottom", 0);
   $galleryItems.wrap(`<div class="imagegrid imagegrid-container"></div>`);
   nfts.forEach(async (nft, idx) => {
@@ -82,11 +83,12 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
     const $currGalleryTitle = $galleryItemsTitles.eq(idx);
     const $currGalleryArtist = $galleryItemsArtists.eq(idx);
     const $currGalleryEtherscanLink = $galleryItemsEtherscanLinks.eq(idx);
+    const $currGalleryLikeButton = $galleryItemsLikeButtons.eq(idx);
     const etherscanLink = `${baseUrl}/etherscan/${nftId}`;
     const $lightboxLink = $currGalleryItem.parent();
     const isVideoFile = checkIfVideo(nftSrc);
     $.get( `${baseUrl}/liked/${nftId}`, function () {
-      $currGalleryItem.parent().addClass("liked");
+      $currGalleryLikeButton.addClass("liked");
     } );
     if (isVideoFile) {
       let webpSrc = nftSrc.replace("./static/", `${baseUrl}/static/min/`);
