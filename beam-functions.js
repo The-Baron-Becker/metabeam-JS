@@ -29,7 +29,7 @@ function loadUserWallet() {
     (reason) => $(".wallet-grid").hide()
   );
 }
-function toggleNFTLike($currGalleryLikeButton, nft_id) {
+function toggleNFTLike($currGalleryLikeButton, nftId) {
   const walletAddress = window.getCookie("user wallet address");
   if ( $currGalleryLikeButton.hasClass("liked") ) {
     $.get( `${baseUrl}/unlike/${nftId}?wallet_address=${walletAddress}`, function () {
@@ -104,7 +104,7 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
       $currGalleryLikeButton.addClass("liked");
     } );
     $currGalleryLikeButton.click(function () {
-      toggleNFTLike($(this), nft_id);
+      toggleNFTLike($(this), nftId);
     });
     if (isVideoFile) {
       let webpSrc = nftSrc.replace("./static/", `${baseUrl}/static/min/`);
