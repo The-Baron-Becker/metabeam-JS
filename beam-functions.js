@@ -85,6 +85,9 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
     const etherscanLink = `${baseUrl}/etherscan/${nftId}`;
     const $lightboxLink = $currGalleryItem.parent();
     const isVideoFile = checkIfVideo(nftSrc);
+    $.get( `${baseUrl}/liked/${nftId}`, function () {
+      $currGalleryItem.parent().addClass("liked");
+    } );
     if (isVideoFile) {
       let webpSrc = nftSrc.replace("./static/", `${baseUrl}/static/min/`);
       webpSrc = webpSrc.substr(0, webpSrc.length - 4) + ".webp";
