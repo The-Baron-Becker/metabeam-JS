@@ -67,6 +67,7 @@ function swapOutLightbox(nftSrc, name, data, isVideoFile) {
   }, 500);
 }
 makeAPIRequest(`random?size=20`).then((nfts) => {
+  const walletAddress = $walletAddress.val();
   const $galleryItems = $(`.new-gallery-grid img`);
   const $galleryItemsTitles = $(`.new-gallery-grid .nft-title`);
   const $galleryItemsArtists = $(`.new-gallery-grid .nft-artist`);
@@ -87,7 +88,7 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
     const etherscanLink = `${baseUrl}/etherscan/${nftId}`;
     const $lightboxLink = $currGalleryItem.parent();
     const isVideoFile = checkIfVideo(nftSrc);
-    $.get( `${baseUrl}/liked/${nftId}`, function () {
+    $.get( `${baseUrl}/liked/${nftId}?wallet_address=${walletAddress}`, function () {
       $currGalleryLikeButton.addClass("liked");
     } );
     if (isVideoFile) {
