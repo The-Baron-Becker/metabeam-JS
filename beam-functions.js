@@ -315,13 +315,14 @@ async function connectWalletWithMetaMask(e) {
   }
   alert(`Your wallet: ${walletAddress} has now been connected!`);
   loadUserWallet();
+  location.reload();
 
 }
 
 connectWalletBtn.addEventListener("click", connectWalletWithMetaMask);
 loadUserWallet();
 checkIfMembershipNeedsPayment();
-location.reload();
+
 
 // Register METABEAM
 $(".register-metabeam-btn").click(async (e) => {
