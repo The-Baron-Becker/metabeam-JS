@@ -42,7 +42,7 @@ window.makeAPIRequestWithToken = async (endpoint, options = {}) => {
     return ret;
   } catch (e) {
     console.log(e.message);
-
+};
 window.baseUrl = "https://nftviewr.completewebtech.com";
 window.makeAPIRequestForRegister = async (endpoint, options = {}) => {
   const token = window.getCookie("user wallet address");
