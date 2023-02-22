@@ -22,10 +22,10 @@ window.getCookie = (cname) => {
 window.baseUrl = "https://nftviewr.completewebtech.com";
 window.makeAPIRequestWithToken = async (endpoint, options = {}) => {
   const token = window.getCookie("user wallet address");
-  if (token === "") {
-    document.querySelector("#sign-in-modal").style.display = "block";
-    return { status: "Not logged in" };
-  }
+  ///if (token === "") {
+  ///  document.querySelector("#sign-in-modal").style.display = "block";
+   /// return { status: "Not logged in" };
+  ///}
   try {
     const res = await fetch(`${baseUrl}/${endpoint}?wallet_address=${token}`, {
       headers: {
