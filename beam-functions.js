@@ -278,7 +278,7 @@ $searchBtn.click(async (e) => {
 /////////////////////////////////////////////////////////////////////
 const $registerBtn = $("form#register-form input[type='submit']");
 const $loginBtn = $("form#login-form input[type='submit']");
-
+const $logoutBtn = $(".logout-button, .logout-link");
 
 async function login(e, register = false) {
   e.preventDefault();
@@ -304,6 +304,10 @@ async function login(e, register = false) {
 
 $registerBtn.click((e) => login(e, true));
 $loginBtn.click((e) => login(e));
+$logoutBtn.click((e) => {
+  setCookie("token", "");
+  window.location = "/interface";
+});
 
 /////////////////////////////////////////////////////////////////////
 // Wallet Connect Code
