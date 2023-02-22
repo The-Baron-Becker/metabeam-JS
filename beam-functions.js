@@ -348,3 +348,152 @@ $contractAddress.click(clearAllSearch);
 $walletAddress.click(clearAllSearch);
 $keyword.click(clearAllSearch);
 
+
+///code from baron
+
+  $('.nav_profile').on('click', function (evt) {
+    $('.profile_tab').click();
+  });
+  $('.nav_featured').on('click', function (evt) {
+    $('.featured_tab').click();
+  });
+  $('.nav_gallery').on('click', function (evt) {
+    $('.gallery_tab').click();
+  });
+  $('.nav_search').on('click', function (evt) {
+    $('.search_tab').click();
+  });
+  $('.nav_help').on('click', function (evt) {
+    $('.help_tab').click();
+  });
+/// hide/show wallet connect buttons and identicon with ens or wallet address
+async function waitForWallet() {
+  // Get the wallet address
+  const walletAddress = await userWalletAddress;
+}
+const connectWalletButton = document.querySelector(".wallet-connect")
+const walletConnectedButton = document.querySelector(".wallet-connected-div");
+const userWalletAddress = window.getCookie("user wallet address")
+const walletAddress = waitForWallet()
+if (userWalletAddress != null) {
+
+  if (userWalletAddress !== "") {
+    connectWalletButton.style.visibility = 'hidden';
+    walletConnectedButton.style.visibility = 'visible';
+  } 
+  else {
+  connectWalletButton.style.visibility = 'visible';
+  walletConnectedButton.style.visibility = 'hidden';
+  }
+}
+else {
+  walletConnectedButton.style.visibility = 'hidden';
+
+}
+
+
+///get ens
+const infuraProjectId = 'a2ac26ffafad4112921acd1e3213f623'; // Replace with your actual Infura project ID
+const provider = new ethers.providers.InfuraProvider('mainnet', infuraProjectId);
+
+async function getENSName(address) {
+        try {
+          const name = await provider.lookupAddress(address);
+          return name;
+        } catch (error) {
+          return address
+        }
+      }
+
+const walletButton = document.querySelector('.wallet-connected');
+const ensName = document.querySelector('.ens-name');
+const abbreviatedStr = `${userWalletAddress.substr(0, 6)}...${userWalletAddress.substr(-6)}`;
+console.log(abbreviatedStr);
+getENSName(userWalletAddress).then(name => {
+	if (name) {
+  walletButton.textContent = name;
+	ensName.textContent = name;
+} else {
+  walletButton.textContent = abbreviatedStr;
+	ensName.textContent = abbreviatedStr;
+}
+}).catch(error => {
+
+
+});
+const walletTextDropdown = document.querySelector('.wallet-text-dropdown');
+walletTextDropdown.textContent = abbreviatedStr;
+
+
+function getIdenticon(walletAddress, size) {
+  const hash = jdenticon.toSvg(waitForWallet(), size);
+  return hash;
+}
+
+const identicon = getIdenticon(userWalletAddress, 20);
+
+const blockieIcon = blockies.create({ seed: userWalletAddress, size:8, scale: 3});
+//const blockieIconProfile = blockies.create({ seed: userWalletAddress, size:6, scale: 6});
+
+const identiconBox = document.querySelector('.identicon-box');
+
+////identiconBox.innerHTML = blockieIcon;
+////profileBox.innerHTML = blockieIconProfile;
+identiconBox.appendChild(blockieIcon);
+
+
+const web3 = new Web3('https://mainnet.infura.io/v3/a2ac26ffafad4112921acd1e3213f623');
+web3.eth.getBalance(userWalletAddress, (error, balance) => {
+    if (error) {
+      console.error(error);
+    } else {
+      // Convert the balance to Ether units and update the 'eth-balance' element
+      const balanceEth = web3.utils.fromWei(balance, 'ether');
+      const roundedBalance = Number(balanceEth).toFixed(4);
+      document.querySelector('.eth-balance').textContent = `${roundedBalance} ETH`;
+    }
+  });
+
+
+function deleteAllCookies() {
+  const cookies = document.cookie.split(";");
+
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i];
+    const eqPos = cookie.indexOf("=");
+    const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  }
+
+  // Disconnect the MetaMask wallet
+  if (window.ethereum && window.ethereum.disconnect) {
+    window.ethereum.disconnect()
+      .then(() => {
+        console.log("Wallet disconnected");
+        // Add any additional code to run after the wallet is disconnected
+      })
+      .catch((err) => {
+        console.error("Error disconnecting wallet:", err);
+      });
+  } else {
+    console.warn("Ethereum wallet not detected or version is outdated.");
+  }
+}
+
+///logout button
+const logoutBtn = document.querySelector(".logout-button");
+
+logoutBtn.addEventListener("click", () => {
+	
+  deleteAllCookies();
+  location.reload();
+  });
+
+const refreshButton = document.querySelector(".refresh")
+refreshButton.addEventListener("click", () => {
+  location.reload();
+  });
+
+
+
+
