@@ -299,7 +299,7 @@ async function login(e, register = false) {
   window.setCookie("token", res.token);
   $("#sign-in-modal").hide();
   checkIfMembershipNeedsPayment();
-  window.initializeStripe();
+///  window.initializeStripe();
 }
 
 $registerBtn.click((e) => login(e, true));

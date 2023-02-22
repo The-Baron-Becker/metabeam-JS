@@ -55,6 +55,7 @@ window.loadUserDevicesList = async () => {
   const devicesList = devices.map(d => `<li><img src="https://uploads-ssl.webflow.com/62dec8d82ed41d0b91ac5cf1/6310cf8381e79c171b4d1345_trash.svg" class="delete-tv-icon" alt="Delete this TV" data-name="${d.name}" data-serial="${d.serial_number}" /> ${d.name}</li>`).join();
   $(".registered-devices-list").html(`<ul>${devicesList}</ul>`);
 };
+/*
 window.checkIfMembershipNeedsPayment = async () => {
   const res = await makeAPIRequestWithToken("membership/status");
   const { email, status } = res;
@@ -72,6 +73,7 @@ window.checkIfMembershipNeedsPayment = async () => {
     $(".successful-payment-modal").css("display", "flex");
   }
 };
+*/
 window.beamNFT = async (url, wallet_address, contract_address, token_id) => {
   const devIdx = parseInt(document.querySelector(".beam-select")?.value || 0);
   const selDevice = devices[devIdx];

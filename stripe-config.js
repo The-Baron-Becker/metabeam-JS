@@ -1,3 +1,4 @@
+/*
 const stripe = Stripe(
   "pk_live_51LX5GaK4Ah2UpgCD3vp0J0PFdUcRxTtW0CxEArCXVyxkojUk1clEHLoGbpwvE8n7kDgqqAEeCBwaHuBwIWH7QjOz00WSUUzbbj"
 );
@@ -111,3 +112,4 @@ setTimeout(() => {
     .addEventListener("submit", handleSubmit);
 }, 1000);
 
+*/
