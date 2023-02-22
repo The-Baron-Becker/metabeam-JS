@@ -27,7 +27,7 @@ window.makeAPIRequestWithToken = async (endpoint, options = {}) => {
     return { status: "Not logged in" };
   }
   try {
-    const res = await fetch(`${baseUrl}/${endpoint}?wallet_address=${token}`, {
+    const res = await fetch(`${baseUrl}/${endpoint}`, {
       headers: {
         "Content-Type": "application/json",
         "x-access-tokens": token,
