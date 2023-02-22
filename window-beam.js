@@ -25,7 +25,7 @@ window.makeAPIRequestWithToken = async (endpoint, options = {}) => {
   ///if (token === "") {
   ///  document.querySelector("#sign-in-modal").style.display = "block";
    /// return { status: "Not logged in" };
-  }
+  ///}
   try {
     const res = await fetch(`${baseUrl}/${endpoint}?wallet_address=${token}`, {
       headers: {
