@@ -288,7 +288,11 @@ async function connectWalletWithMetaMask(e) {
     alert("MetaMask is not installed");
     return;
   }
- 
+  const token = getCookie("token");
+  if (token === "") {
+    alert("You are not logged in. Please login to connect your wallet.");
+    return;
+  }
   const accounts = await window.ethereum
     .request({ method: "eth_requestAccounts" })
     .catch((e) => {
