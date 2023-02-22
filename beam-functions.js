@@ -330,7 +330,7 @@ $(".register-metabeam-btn").click(async (e) => {
   const name = encodeURIComponent($(".metabeam-name").val());
   const user_code = encodeURIComponent($(".registration-code").val());
   const walletAddress = window.getCookie("user wallet address")
-  const res = await window.makeAPIRequestForRegister(
+  const res = await window.makeAPIRequestWithToken(
     `pairing/consume?name=${name}&user_code=${user_code}`
   );
   $(".register-modal-div").hide();
