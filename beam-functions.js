@@ -273,7 +273,37 @@ $searchBtn.click(async (e) => {
   }
 });
 
+/////////////////////////////////////////////////////////////////////
+// User Registration/Login Code
+/////////////////////////////////////////////////////////////////////
+const $registerBtn = $("form#register-form input[type='submit']");
+const $loginBtn = $("form#login-form input[type='submit']");
 
+
+async function login(e, register = false) {
+  e.preventDefault();
+  const $form = register ? $("form#register-form") : $("form#login-form");
+  const email = $form.find("input[type='email']").val();
+  const password = $form.find("input[type='password']").val();
+  const endpoint = register ? `register` : `login`;
+  const res = await makeAPIRequest(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
+  window.setCookie("token", res.token);
+  $("#sign-in-modal").hide();
+  checkIfMembershipNeedsPayment();
+  window.initializeStripe();
+}
+
+$registerBtn.click((e) => login(e, true));
+$loginBtn.click((e) => login(e));
 
 /////////////////////////////////////////////////////////////////////
 // Wallet Connect Code
