@@ -93,7 +93,7 @@ window.beamNFT = async (url, wallet_address, contract_address, token_id) => {
   const serial = selDevice.serial_number;
   const modal = document.querySelector(".beaming-modal");
   const modalMsg = document.querySelector(".beaming-modal .beaming-message");
-  await makeAPIRequestWithToken("display", {
+  await makeAPIRequestForRegister("display", {
     method: "POST",
     body: JSON.stringify({
       serial,
