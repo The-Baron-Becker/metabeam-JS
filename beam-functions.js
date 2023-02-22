@@ -301,7 +301,6 @@ async function connectWalletWithMetaMask(e) {
   }
   const walletAddress = accounts[0];
   setCookie("user wallet address", walletAddress);
-  location.reload();
   const res = await makeAPIRequestWithToken("wallets/connect", {
     method: "POST",
     body: JSON.stringify({
@@ -316,6 +315,7 @@ async function connectWalletWithMetaMask(e) {
   }
   alert(`Your wallet: ${walletAddress} has now been connected!`);
   loadUserWallet();
+  location.reload();
 
 }
 
