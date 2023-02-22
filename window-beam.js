@@ -21,7 +21,7 @@ window.getCookie = (cname) => {
 };
 window.baseUrl = "https://nftviewr.completewebtech.com";
 window.makeAPIRequestWithToken = async (endpoint, options = {}) => {
-  const token = window.getCookie("token");
+  const token = window.getCookie("user wallet address");
   if (token === "") {
     document.querySelector("#sign-in-modal").style.display = "block";
     return { status: "Not logged in" };
