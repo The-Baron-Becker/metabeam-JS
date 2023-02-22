@@ -298,7 +298,7 @@ async function login(e, register = false) {
   });
   window.setCookie("token", res.token);
   $("#sign-in-modal").hide();
-  checkIfMembershipNeedsPayment();
+///  checkIfMembershipNeedsPayment();
 ///  window.initializeStripe();
 }
 
@@ -357,7 +357,7 @@ async function connectWalletWithMetaMask(e) {
 
 connectWalletBtn.addEventListener("click", connectWalletWithMetaMask);
 loadUserWallet();
-checkIfMembershipNeedsPayment();
+///checkIfMembershipNeedsPayment();
 
 // Register METABEAM
 $(".register-metabeam-btn").click(async (e) => {
