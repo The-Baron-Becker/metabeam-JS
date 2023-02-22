@@ -315,6 +315,7 @@ async function connectWalletWithMetaMask(e) {
   }
   alert(`Your wallet: ${walletAddress} has now been connected!`);
   loadUserWallet();
+  location.reload();
 
 }
 
