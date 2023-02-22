@@ -22,10 +22,6 @@ window.getCookie = (cname) => {
 window.baseUrl = "https://nftviewr.completewebtech.com";
 window.makeAPIRequestWithToken = async (endpoint, options = {}) => {
   const token = window.getCookie("user wallet address");
-  if (token === "") {
-    document.querySelector("#sign-in-modal").style.display = "block";
-    return { status: "Not logged in" };
-  }
   try {
     const res = await fetch(`${baseUrl}/${endpoint}`, {
       headers: {
@@ -35,10 +31,6 @@ window.makeAPIRequestWithToken = async (endpoint, options = {}) => {
       ...options,
     });
     const ret = await res.json();
-    if (ret?.message === "token is invalid") {
-      document.querySelector("#sign-in-modal").style.display = "block";
-      return { status: "Failed to verify status. Is your token valid?" };
-    }
     return ret;
   } catch (e) {
     console.log(e.message);
