@@ -41,7 +41,7 @@ window.baseUrl = "https://nftviewr.completewebtech.com";
 window.makeAPIRequestForRegister = async (endpoint, options = {}) => {
   const token = window.getCookie("user wallet address");
   try {
-    const res = await fetch(`${baseUrl}/?${endpoint}&wallet_address=${token}`, {
+    const res = await fetch(`${baseUrl}/${endpoint}&wallet_address=${token}`, {
       headers: {
         "Content-Type": "application/json",
         "x-access-tokens": token,
