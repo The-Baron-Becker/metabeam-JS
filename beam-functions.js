@@ -464,7 +464,7 @@ function getIdenticon(walletAddress, size) {
   return hash;
 }
 
-const identicon = getIdenticon(userWalletAddress, 20);
+///const identicon = getIdenticon(userWalletAddress, 20);
 
 const blockieIcon = blockies.create({ seed: userWalletAddress, size:8, scale: 3});
 //const blockieIconProfile = blockies.create({ seed: userWalletAddress, size:6, scale: 6});
