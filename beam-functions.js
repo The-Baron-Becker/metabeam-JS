@@ -458,14 +458,14 @@ const abbreviatedStr = `${userWalletAddress.substr(0, 6)}...${userWalletAddress.
 console.log(abbreviatedStr);
 getENSName(userWalletAddress).then(name => {
 	if (name) {
-  walletButton.textContent = name;
-	ensName.textContent = name;
+  walletButton.textContent = `ENS: ${name}`;
+	ensName.textContent = `ENS: ${name}`;
 } else {
-  walletButton.textContent = abbreviatedStr;
-	ensName.textContent = abbreviatedStr;
+  walletButton.textContent = `Address: ${abbreviatedStr}`;
+	ensName.textContent = `Address: ${abbreviatedStr}`;
 }
 }).catch(error => {
-
+`${roundedBalance} ETH`;
 
 });
 const walletTextDropdown = document.querySelector('.wallet-text-dropdown');
