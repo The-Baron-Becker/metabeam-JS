@@ -30,15 +30,14 @@ function loadUserWallet() {
   );
 }
 function toggleNFTLike($currGalleryLikeButton, nftId) {
-  const walletAddress = window.getCookie("user wallet address");
   if ( $currGalleryLikeButton.hasClass("liked") ) {
-    $.get( `${baseUrl}/unlike/${nftId}?wallet_address=${walletAddress}`, function () {
-      $currGalleryLikeButton.removeClass("liked");
-    } );
+    const res = await makeAPIRequestWithToken(`${baseUrl}/unlike/${nftId}`, {method: "GET"});
+    console.log({res});
+    $currGalleryLikeButton.removeClass("liked");
   } else {
-    $.get( `${baseUrl}/like/${nftId}?wallet_address=${walletAddress}`, function () {
-      $currGalleryLikeButton.addClass("liked");
-    } );
+    const res = await makeAPIRequestWithToken(`${baseUrl}/like/${nftId}`, {method: "GET"});
+    console.log({res});
+    $currGalleryLikeButton.addClass("liked");
   }
 }
 function swapOutLightbox(nftSrc, name, data, isVideoFile) {
@@ -100,9 +99,9 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
     const etherscanLink = `${baseUrl}/etherscan/${nftId}`;
     const $lightboxLink = $currGalleryItem.parent();
     const isVideoFile = checkIfVideo(nftSrc);
-    $.get( `${baseUrl}/liked/${nftId}?wallet_address=${walletAddress}`, function () {
-      $currGalleryLikeButton.addClass("liked");
-    } );
+    const likedRes = await makeAPIRequestWithToken(`${baseUrl}/liked/${nftId}`, {method: "GET"});
+    console.log({likedRes});
+    $currGalleryLikeButton.addClass("liked");
     $currGalleryLikeButton.click(function () {
       toggleNFTLike($(this), nftId);
     });
