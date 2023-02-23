@@ -312,7 +312,7 @@ $logoutBtn.click((e) => {
 /////////////////////////////////////////////////////////////////////
 // Wallet Connect Code
 /////////////////////////////////////////////////////////////////////
-const $connectWalletBtn = $(".wallet-connect");
+const $connectWalletBtn = $(".wallet-connect, .login-with-wallet");
 const checkIfWalletIsInstalled = () => !(typeof window.ethereum == "undefined");
 
 async function connectWalletWithMetaMask(e) {
