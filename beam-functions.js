@@ -32,11 +32,9 @@ function loadUserWallet() {
 async function toggleNFTLike($currGalleryLikeButton, nftId) {
   if ( $currGalleryLikeButton.hasClass("liked") ) {
     const res = await makeAPIRequestWithToken(`${baseUrl}/unlike/${nftId}`, {method: "GET"});
-    console.log({res});
     $currGalleryLikeButton.removeClass("liked");
   } else {
     const res = await makeAPIRequestWithToken(`${baseUrl}/like/${nftId}`, {method: "GET"});
-    console.log({res});
     $currGalleryLikeButton.addClass("liked");
   }
 }
@@ -101,7 +99,9 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
     const isVideoFile = checkIfVideo(nftSrc);
     const likedRes = await makeAPIRequestWithToken(`${baseUrl}/liked/${nftId}`, {method: "GET"});
     console.log({likedRes});
-    $currGalleryLikeButton.addClass("liked");
+    if ( !likedRes?.status ) {
+      $currGalleryLikeButton.addClass("liked");
+    }
     $currGalleryLikeButton.click(function () {
       toggleNFTLike($(this), nftId);
     });
