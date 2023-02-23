@@ -99,7 +99,7 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
     const isVideoFile = checkIfVideo(nftSrc);
     const likedRes = await makeAPIRequestWithToken(`liked/${nftId}`, {method: "GET"});
     console.log({likedRes});
-    if ( !likedRes?.status ) {
+    if ( !likedRes.hasOwnProperty('status') ) {
       $currGalleryLikeButton.addClass("liked");
     }
     $currGalleryLikeButton.click(function () {
