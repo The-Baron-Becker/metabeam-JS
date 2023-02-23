@@ -469,7 +469,7 @@ getENSName(userWalletAddress).then(name => {
 
 });
 const walletTextDropdown = document.querySelector('.wallet-text-dropdown');
-walletTextDropdown.textContent = abbreviatedStr;
+walletTextDropdown.textContent = `Address: ${abbreviatedStr}`;
 
 
 
@@ -496,7 +496,7 @@ web3.eth.getBalance(userWalletAddress, (error, balance) => {
       // Convert the balance to Ether units and update the 'eth-balance' element
       const balanceEth = web3.utils.fromWei(balance, 'ether');
       const roundedBalance = Number(balanceEth).toFixed(4);
-      document.querySelector('.eth-balance').textContent = `${roundedBalance} ETH`;
+      document.querySelector('.eth-balance').textContent = `Balance: ${roundedBalance} ETH`;
     }
   });
 
