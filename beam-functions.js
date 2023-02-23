@@ -472,21 +472,18 @@ const walletTextDropdown = document.querySelector('.wallet-text-dropdown');
 walletTextDropdown.textContent = abbreviatedStr;
 
 
-function getIdenticon(walletAddress, size) {
-  const hash = jdenticon.toSvg(waitForWallet(), size);
-  return hash;
-}
-
-///const identicon = getIdenticon(userWalletAddress, 20);
 
 const blockieIcon = blockies.create({ seed: userWalletAddress, size:8, scale: 3});
-//const blockieIconProfile = blockies.create({ seed: userWalletAddress, size:6, scale: 6});
 
 const identiconBox = document.querySelector('.identicon-box');
 
-////identiconBox.innerHTML = blockieIcon;
-////profileBox.innerHTML = blockieIconProfile;
 identiconBox.appendChild(blockieIcon);
+
+var profileIconDiv = document.querySelector('.profile-icon');
+profileIconDiv.style.backgroundImage = 'url(' + blockieIcon.toDataURL() + ')';
+
+var identiconBoxDiv = document.querySelector('.identicon-box');
+identiconBoxDiv.style.backgroundImage = 'url(' + blockieIcon.toDataURL() + ')';
 
 
 const web3 = new Web3('https://mainnet.infura.io/v3/a2ac26ffafad4112921acd1e3213f623');
