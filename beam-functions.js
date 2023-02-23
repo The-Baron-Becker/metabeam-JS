@@ -458,7 +458,7 @@ const abbreviatedStr = `${userWalletAddress.substr(0, 6)}...${userWalletAddress.
 console.log(abbreviatedStr);
 getENSName(userWalletAddress).then(name => {
 	if (name) {
-  walletButton.textContent = `ENS: ${name}`;
+  walletButton.textContent = name;
 	ensName.textContent = `ENS: ${name}`;
 } else {
   walletButton.textContent = `Address: ${abbreviatedStr}`;
