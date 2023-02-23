@@ -347,6 +347,7 @@ async function connectWalletWithMetaMask(e) {
     window.setCookie("user wallet address", walletAddress);
     $("#sign-in-modal").hide();
     loadUserWallet();
+    location.reload();
     return;
   }
   window.setCookie("user wallet address", walletAddress);
