@@ -97,9 +97,8 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
     const etherscanLink = `${baseUrl}/etherscan/${nftId}`;
     const $lightboxLink = $currGalleryItem.parent();
     const isVideoFile = checkIfVideo(nftSrc);
-    try {
-      const likedRes = await makeAPIRequestWithToken(`liked/${nftId}`, {method: "GET"});
-    } catch {
+    const likedRes = await makeAPIRequestWithToken(`liked/${nftId}`, {method: "GET"});
+    if ( likedRes.message === "NFT is liked" ) {
       $currGalleryLikeButton.addClass("liked");
     }
     $currGalleryLikeButton.click(function () {
