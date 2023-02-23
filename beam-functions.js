@@ -29,7 +29,7 @@ function loadUserWallet() {
     (reason) => $(".wallet-grid").hide()
   );
 }
-function toggleNFTLike($currGalleryLikeButton, nftId) {
+async function toggleNFTLike($currGalleryLikeButton, nftId) {
   if ( $currGalleryLikeButton.hasClass("liked") ) {
     const res = await makeAPIRequestWithToken(`${baseUrl}/unlike/${nftId}`, {method: "GET"});
     console.log({res});
