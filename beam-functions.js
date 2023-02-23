@@ -305,14 +305,14 @@ async function login(e, register = false) {
 $registerBtn.click((e) => login(e, true));
 $loginBtn.click((e) => login(e));
 $logoutBtn.click((e) => {
-  setCookie("token", "");
+  window.setCookie("token", "");
   window.location = "/interface";
 });
 
 /////////////////////////////////////////////////////////////////////
 // Wallet Connect Code
 /////////////////////////////////////////////////////////////////////
-const connectWalletBtn = document.querySelector(".wallet-connect");
+const $connectWalletBtn = $(".wallet-connect");
 const checkIfWalletIsInstalled = () => !(typeof window.ethereum == "undefined");
 
 async function connectWalletWithMetaMask(e) {
@@ -323,10 +323,6 @@ async function connectWalletWithMetaMask(e) {
     return;
   }
   const token = getCookie("token");
-  if (token === "") {
-    alert("You are not logged in. Please login to connect your wallet.");
-    return;
-  }
   const accounts = await window.ethereum
     .request({ method: "eth_requestAccounts" })
     .catch((e) => {
@@ -338,7 +334,23 @@ async function connectWalletWithMetaMask(e) {
     return;
   }
   const walletAddress = accounts[0];
-  setCookie("user wallet address", walletAddress);
+  if (token === "") {
+    const res = await makeAPIRequest(`register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        wallet_address: walletAddress,
+      }),
+    });
+    window.setCookie("token", res.token);
+    window.setCookie("user wallet address", walletAddress);
+    $("#sign-in-modal").hide();
+    loadUserWallet();
+    return;
+  }
+  window.setCookie("user wallet address", walletAddress);
   const res = await makeAPIRequestWithToken("wallets/connect", {
     method: "POST",
     body: JSON.stringify({
@@ -355,7 +367,7 @@ async function connectWalletWithMetaMask(e) {
   loadUserWallet();
 }
 
-connectWalletBtn.addEventListener("click", connectWalletWithMetaMask);
+$connectWalletBtn.click(connectWalletWithMetaMask);
 loadUserWallet();
 ///checkIfMembershipNeedsPayment();
 
