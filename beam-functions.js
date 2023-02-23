@@ -275,7 +275,7 @@ $searchBtn.click(async (e) => {
 /////////////////////////////////////////////////////////////////////
 // User Registration/Login Code
 /////////////////////////////////////////////////////////////////////
-const $registerBtn = $("form#register-form input[type='submit']");
+const $registerBtn = $(".register-btn");
 const $loginBtn = $("form#login-form input[type='submit']");
 const $logoutBtn = $(".logout-button, .logout-link");
 
