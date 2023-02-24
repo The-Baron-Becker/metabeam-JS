@@ -412,6 +412,14 @@ $keyword.click(clearAllSearch);
   $('.nav_help').on('click', function (evt) {
     $('.help_tab').click();
   });
+
+  $('.sign-up-tab-button').on('click', function (evt) {
+    $('.sign-up-tab').click();
+  });
+  $('.log-in-tab-button').on('click', function (evt) {
+    $('.log-in-tab').click();
+  });
+
 /// hide/show wallet connect buttons and identicon with ens or wallet address
 async function waitForWallet() {
   // Get the wallet address
