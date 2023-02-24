@@ -200,6 +200,7 @@ const setGridContents = (nfts, $grid, data = {}) => {
     if (isVideoFile) {
       newImage = `<div class="imagegrid imagegrid-container"><video src="${nftSrc}" data-src="${nftSrc}" data-name="${name}" ${dataAttr} class="imagegrid-replacement" muted playsinline loop preload="auto" autoplay webkit-playsinline x5-playsinline /></div>`;
     }
+    $container.addClass("active");
     $image.replaceWith(newImage);
     $name.html(nft.name);
     $artist.html(nft.artist);
