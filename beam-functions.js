@@ -168,8 +168,8 @@ const getDataAttr = (data) => {
   return dataList.join(" ");
 };
 const setGridContents = (nfts, $grid, data = {}) => {
-  $grid.find("*").remove();
   $grid.css("display", "");
+  const $images = $grid.find(".imagegrid");
   if (nfts.length === 1) {
     $grid.css("display", "flex");
   }
@@ -196,7 +196,7 @@ const setGridContents = (nfts, $grid, data = {}) => {
     if (isVideoFile) {
       newImage = `<div class="imagegrid imagegrid-container"><video src="${nftSrc}" data-src="${nftSrc}" data-name="${name}" ${dataAttr} class="imagegrid-replacement" muted playsinline loop preload="auto" autoplay webkit-playsinline x5-playsinline /></div>`;
     }
-    const $imageContainer = $grid.append(newImage);
+    $images.eq(idx).replaceWith(newImage);
   });
   $grid.find("img.imagegrid-replacement").on("error", (e) => {
     $(e.target).parent().remove();
