@@ -30,7 +30,7 @@ function loadUserWallet() {
   );
 }
 async function loadLikedNFTs() {
-    const res = await makeAPIRequestWithToken(`liked`, {method: "GET"});
+    const res = await makeAPIRequestWithToken(`liked/0`, {method: "GET"});
 }
 async function toggleNFTLike($currGalleryLikeButton, nftId) {
   if ( $currGalleryLikeButton.hasClass("liked") ) {
