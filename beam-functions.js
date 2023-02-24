@@ -296,6 +296,7 @@ async function login(e, register = false) {
   });
   window.setCookie("token", res.token);
   $("#sign-in-modal").hide();
+  loadUserDevicesList();
 ///  checkIfMembershipNeedsPayment();
 ///  window.initializeStripe();
 }
