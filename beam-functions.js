@@ -75,7 +75,7 @@ function swapOutLightbox(nftSrc, name, data, isVideoFile) {
     );
   }, 500);
 }
-makeAPIRequest(`search?q=#gallery`).then((nfts) => {
+makeAPIRequest(`random?size=20`).then((nfts) => {
   const walletAddress = window.getCookie("user wallet address");
   const $galleryItems = $(`.new-gallery-grid img`);
   const $galleryItemsTitles = $(`.new-gallery-grid .nft-title`);
