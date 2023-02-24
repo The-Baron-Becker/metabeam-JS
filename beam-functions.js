@@ -460,7 +460,7 @@ getENSName(userWalletAddress).then(name => {
   walletButton.textContent = name;
 	ensName.textContent = `ENS: ${name}`;
 } else {
-  walletButton.textContent = `Address: ${abbreviatedStr}`;
+  walletButton.textContent = abbreviatedStr;
 	ensName.textContent = `Address: ${abbreviatedStr}`;
 }
 }).catch(error => {
