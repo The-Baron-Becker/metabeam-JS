@@ -169,11 +169,15 @@ const getDataAttr = (data) => {
 };
 const setGridContents = (nfts, $grid, data = {}) => {
   $grid.css("display", "");
-  const $images = $grid.find(".imagegrid");
+  const $containers = $grid.find(".gallery-nft-container");
   if (nfts.length === 1) {
     $grid.css("display", "flex");
   }
   nfts.forEach((nft, idx) => {
+    const $container = $containers.eq(idx);
+    const $image = $container.find(".imagegrid");
+    const $name = $container.find(".nft-title");
+    const $artist = $container.find(".nft-artist");
     if (nft.contractAddress) {
       data["contractaddress"] = nft.contractAddress;
     }
@@ -196,7 +200,9 @@ const setGridContents = (nfts, $grid, data = {}) => {
     if (isVideoFile) {
       newImage = `<div class="imagegrid imagegrid-container"><video src="${nftSrc}" data-src="${nftSrc}" data-name="${name}" ${dataAttr} class="imagegrid-replacement" muted playsinline loop preload="auto" autoplay webkit-playsinline x5-playsinline /></div>`;
     }
-    $images.eq(idx).replaceWith(newImage);
+    $image.replaceWith(newImage);
+    $name.html(nft.name);
+    $artist.html(nft.artist);
   });
   $grid.find("img.imagegrid-replacement").on("error", (e) => {
     $(e.target).parent().remove();
