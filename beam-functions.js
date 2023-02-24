@@ -29,6 +29,9 @@ function loadUserWallet() {
     (reason) => $(".wallet-grid").hide()
   );
 }
+async function loadLikedNFTs() {
+    const res = await makeAPIRequestWithToken(`liked`, {method: "GET"});
+}
 async function toggleNFTLike($currGalleryLikeButton, nftId) {
   if ( $currGalleryLikeButton.hasClass("liked") ) {
     const res = await makeAPIRequestWithToken(`unlike/${nftId}`, {method: "GET"});
@@ -365,6 +368,7 @@ async function connectWalletWithMetaMask(e) {
   }
   alert(`Your wallet: ${walletAddress} has now been connected!`);
   loadUserWallet();
+  loadLikedNFTs();
   location.reload();
   loadUserDevicesList();
 
@@ -372,6 +376,7 @@ async function connectWalletWithMetaMask(e) {
 
 $connectWalletBtn.click(connectWalletWithMetaMask);
 loadUserWallet();
+loadLikedNFTs();
 ///checkIfMembershipNeedsPayment();
 
 // Register METABEAM
