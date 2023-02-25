@@ -494,7 +494,7 @@ const walletTextDropdown = document.querySelector('.wallet-text-dropdown');
 walletTextDropdown.textContent = abbreviatedStr;
 
 // Create the etherscan URL using the wallet address
-const etherscanUrl = `https://etherscan.io/address/${walletAddress}`;
+const etherscanUrl = `https://etherscan.io/address/${userWalletAddress}`;
 
 // Add a click event listener to the wallet-dropdown element
 walletTextDropdown.addEventListener('click', () => {
