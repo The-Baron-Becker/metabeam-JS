@@ -493,6 +493,15 @@ getENSName(userWalletAddress).then(name => {
 const walletTextDropdown = document.querySelector('.wallet-text-dropdown');
 walletTextDropdown.textContent = abbreviatedStr;
 
+// Create the etherscan URL using the wallet address
+const etherscanUrl = `https://etherscan.io/address/${walletAddress}`;
+
+// Add a click event listener to the wallet-dropdown element
+walletTextDropdown.addEventListener('click', () => {
+  // Open the etherscan URL in a new tab
+  window.open(etherscanUrl, '_blank');
+});
+
 
 
 const blockieIcon1 = blockies.create({ seed: userWalletAddress, size:8, scale: 3});
@@ -561,7 +570,6 @@ const refreshButton = document.querySelector(".refresh")
 refreshButton.addEventListener("click", () => {
   location.reload();
   });
-
 
 
 
