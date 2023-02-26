@@ -53,7 +53,6 @@ async function loadLikedNFTs() {
       );
     }
   });
-  res.liked_nfts.forEach()
 }
 async function toggleNFTLike($currGalleryLikeButton, nftId) {
   if ( $currGalleryLikeButton.hasClass("liked") ) {
