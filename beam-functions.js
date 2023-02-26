@@ -30,7 +30,30 @@ function loadUserWallet() {
   );
 }
 async function loadLikedNFTs() {
-    const res = await makeAPIRequestWithToken(`liked/0`, {method: "GET"});
+  const res = await makeAPIRequestWithToken(`liked/0`, {method: "GET"});
+  $(".likes-gallery-grid .gallery-nft-container").each(function( idx ) {
+    const nft = res.liked_nfts[idx];
+    const nftSrc = nft.links[0];
+    const nftId = nft.nft_id || "";
+    const name = nft.name;
+    const artist = nft.artist;
+    const $currGalleryItem = $(this).find("imagegrid");
+    const $currGalleryTitle = $(this).find(".nft-title");
+    const $currGalleryArtist = $(this).find(".nft-artist");
+    const isVideoFile = checkIfVideo(nftSrc);
+    if (isVideoFile) {
+      let webpSrc = nftSrc.replace("/static/", `/static/min/`);
+      webpSrc = webpSrc.substr(0, webpSrc.length - 4) + ".webp";
+      $currGalleryItem.replaceWith(
+        `<img src="${webpSrc}" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
+      );
+    } else {
+      $currGalleryItem.replaceWith(
+        `<img src="${baseUrl}/thumbnail/${nft.nft_id}?w=300&h=300&square=1" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
+      );
+    }
+  });
+  res.liked_nfts.forEach()
 }
 async function toggleNFTLike($currGalleryLikeButton, nftId) {
   if ( $currGalleryLikeButton.hasClass("liked") ) {
