@@ -37,7 +37,7 @@ async function loadLikedNFTs() {
     const nftId = nft.nft_id || "";
     const name = nft.name;
     const artist = nft.artist;
-    const $currGalleryItem = $(this).find("imagegrid");
+    const $currGalleryItem = $(this).find(".imagegrid");
     const $currGalleryTitle = $(this).find(".nft-title");
     const $currGalleryArtist = $(this).find(".nft-artist");
     const isVideoFile = checkIfVideo(nftSrc);
