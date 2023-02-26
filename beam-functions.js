@@ -40,7 +40,7 @@ async function loadLikedNFTs() {
     const $currGalleryItem = $(this).find(".imagegrid");
     const $currGalleryTitle = $(this).find(".nft-title");
     const $currGalleryArtist = $(this).find(".nft-artist");
-    const $currGalleryLikeButton = $(this).find(".like-nft-heart`);
+    const $currGalleryLikeButton = $(this).find(".like-nft-heart");
     const isVideoFile = checkIfVideo(nftSrc);
     if (isVideoFile) {
       let webpSrc = nftSrc.replace("/static/", `/static/min/`);
