@@ -248,6 +248,8 @@ const setWalletCollection = (nfts, walletAddress = "") => {
 const setSearchResults = (nfts, data = {}) => {
   if (nfts.length === 0) {
     $(".search-no-results").show();
+  } else {
+    $resultsGrid.show();
   }
   setGridContents(nfts, $resultsGrid, data);
 };
