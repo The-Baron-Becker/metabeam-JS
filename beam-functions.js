@@ -342,11 +342,12 @@ async function login(e, register = false) {
     window.setCookie("token", res.token);
     $("#sign-in-modal").hide();
     
-    } else {
+    } else if (res.status === 500) {
     alert("Invalid credentials. Please try again.");
     }
   
 }
+
 
 
 $registerBtn.click((e) => login(e, true));
