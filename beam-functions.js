@@ -344,7 +344,6 @@ async function login(e, register = false) {
     ///  checkIfMembershipNeedsPayment();
     ///  window.initializeStripe();
   } catch (error) {
-    console.error(error);
     // Display an error message to the user, e.g. by updating the text of an error element on the page
     $("#error-message").text("Login failed. Please check your email and password and try again.");
   }
