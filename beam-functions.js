@@ -193,7 +193,7 @@ const getDataAttr = (data) => {
   }
   return dataList.join(" ");
 };
-const setGridContents = (nfts, $grid, data = {}) => {
+const setGridContents = async (nfts, $grid, data = {}) => {
   $grid.css("display", "");
   const $containers = $grid.find(".gallery-nft-container");
   if (nfts.length === 1) {
