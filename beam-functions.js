@@ -45,6 +45,13 @@ async function loadLikedNFTs() {
     const $currGalleryEtherscanLink = $(this).find(".etherscan-link");
     const etherscanLink = `${baseUrl}/etherscan/${nftId}`;
     const isVideoFile = checkIfVideo(nftSrc);
+    const likedRes = await makeAPIRequestWithToken(`liked/${nftId}`, {method: "GET"});
+    if ( likedRes.message === "NFT is liked" ) {
+      $currGalleryLikeButton.addClass("liked");
+    }
+    $currGalleryLikeButton.click(function () {
+      toggleNFTLike($(this), nftId);
+    });
     if (isVideoFile) {
       let webpSrc = nftSrc.replace("/static/", `/static/min/`);
       webpSrc = webpSrc.substr(0, webpSrc.length - 4) + ".webp";
@@ -160,6 +167,7 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
   const $galleryItemsTitles = $(`.featured-gallery-grid .nft-title`);
   const $galleryItemsArtists = $(`.featured-gallery-grid .nft-artist`);
   const $galleryItemsEtherscanLinks = $(`.featured-gallery-grid .etherscan-link`);
+  const $galleryItemsLikeButtons = $(`.featured-gallery-grid .like-nft-heart`);
   $galleryItems.css("margin-bottom", 0);
   $galleryItems.wrap(`<div class="imagegrid imagegrid-container"></div>`);
   nfts.collection.forEach(async (nft, idx) => {
@@ -171,9 +179,17 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
     const $currGalleryTitle = $galleryItemsTitles.eq(idx);
     const $currGalleryArtist = $galleryItemsArtists.eq(idx);
     const $currGalleryEtherscanLink = $galleryItemsEtherscanLinks.eq(idx);
+    const $currGalleryLikeButton = $galleryItemsLikeButtons.eq(idx);
     const etherscanLink = `${baseUrl}/etherscan/${nftId}`;
     const $lightboxLink = $currGalleryItem.parent();
     const isVideoFile = checkIfVideo(nftSrc);
+    const likedRes = await makeAPIRequestWithToken(`liked/${nftId}`, {method: "GET"});
+    if ( likedRes.message === "NFT is liked" ) {
+      $currGalleryLikeButton.addClass("liked");
+    }
+    $currGalleryLikeButton.click(function () {
+      toggleNFTLike($(this), nftId);
+    });
     if (isVideoFile) {
       let webpSrc = nftSrc.replace("/static/", `/static/min/`);
       webpSrc = webpSrc.substr(0, webpSrc.length - 4) + ".webp";
