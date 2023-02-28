@@ -42,6 +42,8 @@ async function loadLikedNFTs() {
     const $currGalleryTitle = $(this).find(".nft-title");
     const $currGalleryArtist = $(this).find(".nft-artist");
     const $currGalleryLikeButton = $(this).find(".like-nft-heart");
+    const $currGalleryEtherscanLink = $(this).find(".etherscan-link");
+    const etherscanLink = `${baseUrl}/etherscan/${nftId}`;
     const isVideoFile = checkIfVideo(nftSrc);
     if (isVideoFile) {
       let webpSrc = nftSrc.replace("/static/", `/static/min/`);
@@ -51,12 +53,13 @@ async function loadLikedNFTs() {
       );
     } else {
       $currGalleryItem.replaceWith(
-        `<img src="${baseUrl}/thumbnail/${nft.nft_id}?w=300&h=300&square=1" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
+        `<img src="${baseUrl}/thumbnail/${nftId}?w=300&h=300&square=1" data-nftid="${nftId}" data-src="${nftSrc}" data-name="${name}" class="imagegrid-replacement" />`
       );
     }
     $currGalleryTitle.html(name);
     $currGalleryArtist.html(artist);
     $currGalleryLikeButton.addClass("liked");
+    $currGalleryEtherscanLink.click(function() { openInNewTab( etherscanLink ) });
   });
 }
 async function toggleNFTLike($currGalleryLikeButton, nftId) {
