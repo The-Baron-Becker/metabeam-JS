@@ -321,7 +321,7 @@ $searchBtn.click(async (e) => {
 const $registerBtn = $(".register-btn");
 const $loginBtn = $("form#login-form input[type='submit']");
 const $logoutBtn = $(".logout-button, .logout-link");
-const $invalidCredentialsDiv = $(".invalid-credentials");
+
 async function login(e, register = false) {
   e.preventDefault();
   const $form = register ? $("form#register-form") : $("form#login-form");
@@ -343,7 +343,8 @@ async function login(e, register = false) {
     window.setCookie("token", res.token);
     $("#sign-in-modal").hide();
   } else {
-    invalidCredentialsDiv.show();
+    const invalidCredentialsDiv = document.querySelector(".invalid-credentials");
+    invalidCredentialsDiv.style.display = "block";
   }
 }
 
