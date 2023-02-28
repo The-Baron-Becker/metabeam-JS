@@ -199,7 +199,7 @@ const setGridContents = async (nfts, $grid, data = {}) => {
   if (nfts.length === 1) {
     $grid.css("display", "flex");
   }
-  nfts.forEach((nft, idx) => {
+  nfts.forEach(async (nft, idx) => {
     const $container = $containers.eq(idx);
     const $image = $container.find(".imagegrid");
     const $name = $container.find(".nft-title");
