@@ -343,7 +343,7 @@ async function login(e, register = false) {
     window.setCookie("token", res.token);
     $("#sign-in-modal").hide();
   } else {
-    invalidCredentialsDiv.show();
+    $("#invalid-credentials").show();
   }
 }
 
