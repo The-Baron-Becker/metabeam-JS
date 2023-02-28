@@ -321,7 +321,7 @@ $searchBtn.click(async (e) => {
 const $registerBtn = $(".register-btn");
 const $loginBtn = $("form#login-form input[type='submit']");
 const $logoutBtn = $(".logout-button, .logout-link");
-var invalidCredentialsDiv = document.querySelector(".invalid-credentials");
+var invalidCredentialsDiv = document.getElementById("invalid-credentials");
 
 async function login(e, register = false) {
   e.preventDefault();
