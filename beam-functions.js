@@ -321,7 +321,7 @@ $searchBtn.click(async (e) => {
 const $registerBtn = $(".register-btn");
 const $loginBtn = $("form#login-form input[type='submit']");
 const $logoutBtn = $(".logout-button, .logout-link");
-var invalidCredentialsDiv = document.querySelector(".invalid-credentials");
+
 
 async function login(e, register = false) {
   e.preventDefault();
@@ -329,6 +329,7 @@ async function login(e, register = false) {
   const email = $form.find("input[type='email']").val();
   const password = $form.find("input[type='password']").val();
   const endpoint = register ? `register` : `login`;
+  const invalidCredentialsDiv = document.querySelector(".invalid-credentials");
   const res = await makeAPIRequest(endpoint, {
     method: "POST",
     headers: {
