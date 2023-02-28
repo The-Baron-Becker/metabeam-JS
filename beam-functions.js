@@ -339,7 +339,7 @@ async function login(e, register = false) {
     }),
   });
   
-  if (res.token) {
+  if (res.includes("200")) {
     window.setCookie("token", res.token);
     $("#sign-in-modal").hide();
   } else {
