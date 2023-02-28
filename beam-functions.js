@@ -195,6 +195,7 @@ const getDataAttr = (data) => {
 };
 const setGridContents = async (nfts, $grid, data = {}) => {
   const $containers = $grid.find(".gallery-nft-container");
+  $containers.removeClass("active");
   nfts.forEach(async (nft, idx) => {
     const $container = $containers.eq(idx);
     const $image = $container.find(".imagegrid");
