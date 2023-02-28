@@ -338,11 +338,17 @@ async function login(e, register = false) {
       password,
     }),
   });
-  window.setCookie("token", res.token);
-  $("#sign-in-modal").hide();
-///  checkIfMembershipNeedsPayment();
-///  window.initializeStripe();
+  if (res.status === 200) {
+    window.setCookie("token", res.token);
+    $("#sign-in-modal").hide();
+    
+    } else if (res.status === 500) {
+    alert("Invalid credentials. Please try again.");
+    }
+  
 }
+
+
 
 $registerBtn.click((e) => login(e, true));
 $loginBtn.click((e) => login(e));
