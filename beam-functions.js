@@ -9,6 +9,7 @@ const fetchWallet = (walletAddress) =>
   makeAPIRequest(`wallet/${walletAddress}`);
 const checkIfVideo = (nftSrc) => nftSrc.endsWith(".mp4");
 function openInNewTab(url) {
+  console.log(`Opening ${url} in new tab.`);
   window.open(url, '_blank').focus();
 }
 function loadUserWallet() {
