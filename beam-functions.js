@@ -201,6 +201,8 @@ const setGridContents = async (nfts, $grid, data = {}) => {
     const $image = $container.find(".imagegrid");
     const $name = $container.find(".nft-title");
     const $artist = $container.find(".nft-artist");
+    const $etherscanLink = $container.find(".etherscan-link");
+    const etherscanLink = nft.nft_id ? `${baseUrl}/etherscan/${nft.nft_id}` : `https://etherscan.io/nft/${nft.contractAddress}/${nft.tokenId}`;
     const $likeButton = $container.find(".like-nft-heart");
     if (nft.contractAddress) {
       data["contractaddress"] = nft.contractAddress;
@@ -235,6 +237,7 @@ const setGridContents = async (nfts, $grid, data = {}) => {
     $image.replaceWith(newImage);
     $name.html(nft.name);
     $artist.html(nft.artist);
+    $etherscanLink.click(function() { openInNewTab( etherscanLink ) });
   });
   $grid.find("img.imagegrid-replacement").on("error", (e) => {
     $(e.target).parent().remove();
