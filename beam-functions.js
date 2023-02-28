@@ -344,12 +344,10 @@ async function login(e, register = false) {
     window.setCookie("token", res.token);
     $("#sign-in-modal").hide();
     
-    } else {
+  } else {
     invalidCredentialsDiv.style.visibility = 'visible';
-    }
-  
+  }
 }
-
 
 $registerBtn.click((e) => login(e, true));
 $loginBtn.click((e) => login(e));
