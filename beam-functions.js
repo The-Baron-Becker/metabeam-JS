@@ -328,20 +328,24 @@ async function login(e, register = false) {
   const email = $form.find("input[type='email']").val();
   const password = $form.find("input[type='password']").val();
   const endpoint = register ? `register` : `login`;
-  const res = await makeAPIRequest(endpoint, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-  });
-  window.setCookie("token", res.token);
-  $("#sign-in-modal").hide();
-///  checkIfMembershipNeedsPayment();
-///  window.initializeStripe();
+  try {
+    const res = await makeAPIRequest(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+    window.setCookie("token", res.token);
+    $("#sign-in-modal").hide();
+  } catch {
+    $(".invalid-credentials").show();
+  }
+  ///  checkIfMembershipNeedsPayment();
+  ///  window.initializeStripe();
 }
 
 $registerBtn.click((e) => login(e, true));
