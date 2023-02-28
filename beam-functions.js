@@ -32,7 +32,7 @@ function loadUserWallet() {
 }
 async function loadLikedNFTs() {
   const res = await makeAPIRequestWithToken(`liked/0`, {method: "GET"});
-  $(".likes-gallery-grid .gallery-nft-container").each(function( idx ) {
+  $(".likes-gallery-grid .gallery-nft-container").each(async function( idx ) {
     const nft = res.liked_nfts[idx];
     const nftSrc = nft.links[0];
     const nftId = nft.nft_id || "";
