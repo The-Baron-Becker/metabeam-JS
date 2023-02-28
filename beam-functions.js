@@ -204,6 +204,7 @@ const setGridContents = (nfts, $grid, data = {}) => {
     const $image = $container.find(".imagegrid");
     const $name = $container.find(".nft-title");
     const $artist = $container.find(".nft-artist");
+    const $likeButton = $container.find(".like-nft-heart");
     if (nft.contractAddress) {
       data["contractaddress"] = nft.contractAddress;
     }
@@ -222,6 +223,10 @@ const setGridContents = (nfts, $grid, data = {}) => {
     const artist = nft.artist;
     const name = `${nft.name} - ${artist}`;
     const isVideoFile = checkIfVideo(nftSrc);
+    const likedRes = await makeAPIRequestWithToken(`liked/${nft.nft_id}`, {method: "GET"});
+    if ( likedRes.message === "NFT is liked" ) {
+      $likeButton.addClass("liked");
+    }
     let newImage = `<div class="imagegrid imagegrid-container"><img src="${nftSrc}" data-src="${nftSrc}" data-name="${name}" ${dataAttr} class="imagegrid-replacement" /></div>`;
     if (isVideoFile) {
       newImage = `<div class="imagegrid imagegrid-container"><video src="${nftSrc}" data-src="${nftSrc}" data-name="${name}" ${dataAttr} class="imagegrid-replacement" muted playsinline loop preload="auto" autoplay webkit-playsinline x5-playsinline /></div>`;
