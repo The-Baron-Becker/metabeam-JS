@@ -338,14 +338,10 @@ async function login(e, register = false) {
       password,
     }),
   });
-  
-  if (res.token) {
-    window.setCookie("token", res.token);
-    $("#sign-in-modal").hide();
-  } else {
-    const invalidCredentialsDiv = document.querySelector(".invalid-credentials");
-    invalidCredentialsDiv.style.display = "block";
-  }
+  window.setCookie("token", res.token);
+  $("#sign-in-modal").hide();
+///  checkIfMembershipNeedsPayment();
+///  window.initializeStripe();
 }
 
 $registerBtn.click((e) => login(e, true));
