@@ -187,6 +187,8 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
   const $galleryItemsArtists = $(`.featured-gallery-grid .nft-artist`);
   const $galleryItemsEtherscanLinks = $(`.featured-gallery-grid .etherscan-link`);
   const $galleryItemsLikeButtons = $(`.featured-gallery-grid .like-nft-heart`);
+  const $galleryCopyButtons = $(`.new-gallery-grid .copy-button`);
+
   $galleryItems.css("margin-bottom", 0);
   $galleryItems.wrap(`<div class="imagegrid imagegrid-container"></div>`);
   nfts.collection.forEach(async (nft, idx) => {
@@ -199,10 +201,26 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
     const $currGalleryArtist = $galleryItemsArtists.eq(idx);
     const $currGalleryEtherscanLink = $galleryItemsEtherscanLinks.eq(idx);
     const $currGalleryLikeButton = $galleryItemsLikeButtons.eq(idx);
+    const $currGalleryCopyButton = $galleryCopyButtons.eq(idx);
+    const shareLink = $galleryCopyButtons.eq(idx);
     const etherscanLink = `${baseUrl}/etherscan/${nftId}`;
     const $lightboxLink = $currGalleryItem.parent();
     const isVideoFile = checkIfVideo(nftSrc);
     const likedRes = await makeAPIRequestWithToken(`liked/${nftId}`, {method: "GET"});
+    $currGalleryCopyButton.on("click", () => {
+      const link = `https://share.metabeam.app/?id=${nft.nft_id}`;
+      if (link) {
+        const textarea = document.createElement('textarea');
+        textarea.value = link;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        alert("Link copied to clipboard!");
+      } else {
+        alert("NFT ID not found!");
+      }
+    });
     if ( likedRes.message === "NFT is liked" ) {
       $currGalleryLikeButton.addClass("liked");
     }
