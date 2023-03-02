@@ -226,6 +226,15 @@ const setGridContents = async (nfts, $grid, data = {}) => {
     const $likeButton = $container.find(".like-nft-heart");
     const $copyButton = $container.find(".copy-button");
 
+    $copyButton.on("click", (e) => {
+      const nftId = nft.nft_id;
+      const copyText = `https://share.metabeam.app/?id=${nftId}`;
+      const tempInput = $("<input>");
+      $("body").append(tempInput);
+      tempInput.val(copyText).select();
+      document.execCommand("copy");
+      tempInput.remove();
+    });
     if (nft.contractAddress) {
       data["contractaddress"] = nft.contractAddress;
     }
@@ -261,19 +270,11 @@ const setGridContents = async (nfts, $grid, data = {}) => {
     $artist.html(nft.artist);
     $etherscanLink.click(function() { openInNewTab( etherscanLink ) });
   });
-  $copyButton.on("click", () => {
-    const url = `https://share.metabeam.app/?id=${nft.nft_id}`;
-    const el = document.createElement("textarea");
-    el.value = url;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand("copy");
-    document.body.removeChild(el);
-  });
   $grid.find("img.imagegrid-replacement").on("error", (e) => {
     $(e.target).parent().remove();
   });
 };
+
 const setWalletCollection = (nfts, walletAddress = "") => {
   if (nfts.length > 0) {
     $(".empty-wallet").hide();
