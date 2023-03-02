@@ -226,21 +226,6 @@ const setGridContents = async (nfts, $grid, data = {}) => {
     const $likeButton = $container.find(".like-nft-heart");
     const $copyButton = $container.find(".copy-button");
 
-    $copyButton.on("click", () => {
-      const link = nft.nft_id ? `https://share.metabeam.app/?id=${nft.nft_id}` : '';
-      if (link) {
-        const textarea = document.createElement('textarea');
-        textarea.value = link;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        alert("Link copied to clipboard!");
-      } else {
-        alert("NFT ID not found!");
-      }
-    });
-
     if (nft.contractAddress) {
       data["contractaddress"] = nft.contractAddress;
     }
@@ -275,6 +260,21 @@ const setGridContents = async (nfts, $grid, data = {}) => {
     $name.html(nft.name);
     $artist.html(nft.artist);
     $etherscanLink.click(function() { openInNewTab( etherscanLink ) });
+
+    $copyButton.on("click", () => {
+      const link = nft.nft_id ? `https://share.metabeam.app/?id=${nft.nft_id}` : '';
+      if (link) {
+        const textarea = document.createElement('textarea');
+        textarea.value = link;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        alert("Link copied to clipboard!");
+      } else {
+        alert("NFT ID not found!");
+      }
+    });
   });
   $grid.find("img.imagegrid-replacement").on("error", (e) => {
     $(e.target).parent().remove();
