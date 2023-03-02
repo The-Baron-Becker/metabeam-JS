@@ -136,7 +136,6 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
     const $currGalleryEtherscanLink = $galleryItemsEtherscanLinks.eq(idx);
     const $currGalleryLikeButton = $galleryItemsLikeButtons.eq(idx);
     const $currGalleryCopyButton = $galleryCopyButtons.eq(idx);
-    const shareLink = $galleryCopyButtons.eq(idx);
     const etherscanLink = `${baseUrl}/etherscan/${nftId}`;
     const $lightboxLink = $currGalleryItem.parent();
     const isVideoFile = checkIfVideo(nftSrc);
@@ -202,7 +201,6 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
     const $currGalleryEtherscanLink = $galleryItemsEtherscanLinks.eq(idx);
     const $currGalleryLikeButton = $galleryItemsLikeButtons.eq(idx);
     const $currGalleryCopyButton = $galleryCopyButtons.eq(idx);
-    const shareLink = $galleryCopyButtons.eq(idx);
     const etherscanLink = `${baseUrl}/etherscan/${nftId}`;
     const $lightboxLink = $currGalleryItem.parent();
     const isVideoFile = checkIfVideo(nftSrc);
