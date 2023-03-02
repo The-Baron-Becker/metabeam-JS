@@ -150,8 +150,6 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
         textarea.select();
         document.execCommand('copy');
         document.body.removeChild(textarea);
-      } else {
-        alert("NFT ID not found!");
       }
     });
 
@@ -213,10 +211,7 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
         textarea.select();
         document.execCommand('copy');
         document.body.removeChild(textarea);
-        alert("Link copied to clipboard!");
-      } else {
-        alert("NFT ID not found!");
-      }
+      } 
     });
     if ( likedRes.message === "NFT is liked" ) {
       $currGalleryLikeButton.addClass("liked");
@@ -267,11 +262,8 @@ const setGridContents = async (nfts, $grid, data = {}) => {
         document.body.appendChild(textarea);
         textarea.select();
         document.execCommand('copy');
-        document.body.removeChild(textarea);
-        alert("Link copied to clipboard!");
-      } else {
-        alert("NFT ID not found!");
-      }
+        document.body.removeChild(textarea); 
+      } 
     });
     if (nft.contractAddress) {
       data["contractaddress"] = nft.contractAddress;
