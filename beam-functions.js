@@ -150,7 +150,6 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
         textarea.select();
         document.execCommand('copy');
         document.body.removeChild(textarea);
-        alert("Link copied to clipboard!");
       } else {
         alert("NFT ID not found!");
       }
