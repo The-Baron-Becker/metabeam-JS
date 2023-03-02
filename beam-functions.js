@@ -151,6 +151,9 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
         document.execCommand('copy');
         document.body.removeChild(textarea);
         $currGalleryCopyButton.text("check_circle");
+        setTimeout(() => {
+          $currGalleryCopyButton.text("content_copy");
+        }, 3000);
       }
     });
 
@@ -213,6 +216,9 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
         document.execCommand('copy');
         document.body.removeChild(textarea);
         $currGalleryCopyButton.text("check_circle");
+        setTimeout(() => {
+          $currGalleryCopyButton.text("content_copy");
+        }, 3000);
       } 
     });
     if ( likedRes.message === "NFT is liked" ) {
@@ -268,6 +274,9 @@ const setGridContents = async (nfts, $grid, data = {}) => {
         
         // Add the following code to switch the text inside the button to "check_circle"
         $copyButton.text("check_circle");
+        setTimeout(() => {
+          $copyButton.text("content_copy");
+        }, 3000);
       }
     });
     if (nft.contractAddress) {
