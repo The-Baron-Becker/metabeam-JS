@@ -150,7 +150,7 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
         textarea.select();
         document.execCommand('copy');
         document.body.removeChild(textarea);
-        $copyButton.text("check_circle");
+        $currGalleryCopyButton.text("check_circle");
       }
     });
 
@@ -212,7 +212,7 @@ makeAPIRequest(`search?q=meta-featured`).then((nfts) => {
         textarea.select();
         document.execCommand('copy');
         document.body.removeChild(textarea);
-        $copyButton.text("check_circle");
+        $currGalleryCopyButton.text("check_circle");
       } 
     });
     if ( likedRes.message === "NFT is liked" ) {
