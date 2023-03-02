@@ -225,17 +225,19 @@ const setGridContents = async (nfts, $grid, data = {}) => {
     const etherscanLink = nft.nft_id ? `${baseUrl}/etherscan/${nft.nft_id}` : `https://etherscan.io/nft/${nft.contractAddress}/${nft.tokenId}`;
     const $likeButton = $container.find(".like-nft-heart");
     const $copyButton = $container.find(".copy-button");
-
-    $copyButton.on("click", () => {
-      const link =  await `https://share.metabeam.app/?id=${nft.nft_id}`;
-      const textarea = document.createElement('textarea');
-      textarea.value = link;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-      alert("Link copied to clipboard!");
-    });
+    
+    if (nft.nft_id) {
+      $copyButton.on("click", () => {
+        const link = `https://share.metabeam.app/?id=${nft.nft_id}`;
+        const textarea = document.createElement('textarea');
+        textarea.value = link;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        alert("Link copied to clipboard!");
+      });
+    }
 
     if (nft.contractAddress) {
       data["contractaddress"] = nft.contractAddress;
@@ -243,6 +245,7 @@ const setGridContents = async (nfts, $grid, data = {}) => {
     if (nft.tokenId) {
       data["tokenid"] = nft.tokenId;
     }
+    
     let nftSrc =
       nft.links.find((link) => link.endsWith(".mp4")) ||
       nft.links.find(
