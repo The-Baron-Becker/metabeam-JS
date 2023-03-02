@@ -226,7 +226,6 @@ const setGridContents = async (nfts, $grid, data = {}) => {
     const $likeButton = $container.find(".like-nft-heart");
     const $copyButton = $container.find(".copy-button");
 
-    $copyButton.on("click", (e) => {
     $copyButton.on("click", () => {
       navigator.clipboard.writeText(`https://share.metabeam.app/?id=${nft.nft_id}`);
       alert("Link copied to clipboard!");
