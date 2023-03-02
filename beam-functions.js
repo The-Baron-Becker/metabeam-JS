@@ -142,7 +142,7 @@ makeAPIRequest(`random?size=20`).then((nfts) => {
     const isVideoFile = checkIfVideo(nftSrc);
     const likedRes = await makeAPIRequestWithToken(`liked/${nftId}`, {method: "GET"});
     
-    $copyButton.on("click", () => {
+    $currGalleryCopyButton.on("click", () => {
       const link = `https://share.metabeam.app/?id=${nft.nft_id}`;
       if (link) {
         const textarea = document.createElement('textarea');
