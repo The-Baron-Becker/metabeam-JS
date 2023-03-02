@@ -227,14 +227,11 @@ const setGridContents = async (nfts, $grid, data = {}) => {
     const $copyButton = $container.find(".copy-button");
 
     $copyButton.on("click", (e) => {
-      const nftId = nft.nft_id;
-      const copyText = `https://share.metabeam.app/?id=${nftId}`;
-      const tempInput = $("<input>");
-      $("body").append(tempInput);
-      tempInput.val(copyText).select();
-      document.execCommand("copy");
-      tempInput.remove();
+    $copyButton.on("click", () => {
+      navigator.clipboard.writeText(`https://share.metabeam.app/?id=${nft.nft_id}`);
+      alert("Link copied to clipboard!");
     });
+
     if (nft.contractAddress) {
       data["contractaddress"] = nft.contractAddress;
     }
