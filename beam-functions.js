@@ -533,6 +533,7 @@ $keyword.click(clearAllSearch);
 
   $('.nav_profile').on('click', function (evt) {
     $('.profile_tab').click();
+    loadLikedNFTs();
   });
   $('.nav_featured').on('click', function (evt) {
     $('.featured_tab').click();
